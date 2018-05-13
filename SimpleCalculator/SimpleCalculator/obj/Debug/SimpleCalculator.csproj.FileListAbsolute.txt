@@ -1,0 +1,7 @@
+D:\GitRepos\MyApp\SimpleCalculator\SimpleCalculator\bin\Debug\SimpleCalculator.exe.config
+D:\GitRepos\MyApp\SimpleCalculator\SimpleCalculator\bin\Debug\SimpleCalculator.exe
+D:\GitRepos\MyApp\SimpleCalculator\SimpleCalculator\bin\Debug\SimpleCalculator.pdb
+D:\GitRepos\MyApp\SimpleCalculator\SimpleCalculator\obj\Debug\SimpleCalculator.csprojAssemblyReference.cache
+D:\GitRepos\MyApp\SimpleCalculator\SimpleCalculator\obj\Debug\SimpleCalculator.csproj.CoreCompileInputs.cache
+D:\GitRepos\MyApp\SimpleCalculator\SimpleCalculator\obj\Debug\SimpleCalculator.exe
+D:\GitRepos\MyApp\SimpleCalculator\SimpleCalculator\obj\Debug\SimpleCalculator.pdb
