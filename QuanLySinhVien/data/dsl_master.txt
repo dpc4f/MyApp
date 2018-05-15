@@ -1,0 +1,20 @@
+TH001
+Lap Trinh Huong Doi Tuong
+TH002
+Thiet Ke Co So Du Lieu
+TH003
+He Dieu Hanh
+TH004
+Tri Tue Nhan Tao
+TH005
+Thiet Ke Huong Doi Tuong
+TH006
+Kien Truc May Tinh - Hop Ngu
+TH007
+Xu Ly Ngon Ngu Tu Nhien
+TH008
+Thiet Ke CSDL Nang Cao
+TN001
+Toan Roi Rac
+EN001
+Anh Van 01
