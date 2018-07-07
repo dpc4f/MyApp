@@ -7,10 +7,10 @@
 #include <sstream>
 using namespace std;
 
-const int N = 7;
+const int N = 7; // array size
 const int NOT_AVAILABLE = -1;
-vector<int> arrA{ {0, 1, 1, 2, 3, 4, 5} };
-vector<int> arrB{ {0, 2, 5, 6, 6, 7, 8} };
+vector<int> arrA(N);
+vector<int> arrB(N);
 vector<int> vec_result;
 
 vector<vector<int>> vv_input; // read the numbers from file
@@ -18,8 +18,21 @@ vector<vector<int>> vv_output;
 
 void read_file();
 void write_file();
+
+void execute();
 void merge_arr();
-void merge_arr_02();
+
+void execute_v02();
+void merge_arr_v02();
+
+int main()
+{
+    read_file();
+    execute();
+    execute_v02();
+
+    return 0;
+}
 
 void read_file()
 {
@@ -92,7 +105,7 @@ void merge_arr()
     vv_output.push_back(vec_result);
 }
 
-void merge_arr_02()
+void merge_arr_v02()
 {
     cout << endl << " ------- MERGE ARRAY THE SECOND WAY ------- " << endl;
 
@@ -155,7 +168,7 @@ void merge_arr_02()
     vv_output.push_back(vec_result);
 }
 
-void merging()
+void execute()
 {
     vv_output.clear();
     for (auto it = vv_input.cbegin(); it < vv_input.cend(); it+=2)
@@ -168,26 +181,17 @@ void merging()
     write_file("output.txt");
 }
 
-void merging_02()
+void execute_v02()
 {
     vv_output.clear();
     for (auto it = vv_input.cbegin(); it < vv_input.cend(); it+=2)
     {
         std::copy(std::begin(*it), std::end(*it), std::begin(arrA));
         std::copy(std::begin(*(it+1)), std::end(*(it+1)), std::begin(arrB));
-        merge_arr_02();
+        merge_arr_v02();
     }
 
     write_file("output_02.txt");
-}
-
-int main()
-{
-    read_file();
-    merging();
-    merging_02();
-
-    return 0;
 }
 
 void print_result()
