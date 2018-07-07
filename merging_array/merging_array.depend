@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1530953975 source:e:\sourcecode\merging_array\main.cpp
+	<iostream>
+	<vector>
+	<array>
+	<algorithm>
+	<fstream>
+	<iterator>
+	<sstream>
+
