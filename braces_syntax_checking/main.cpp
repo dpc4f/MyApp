@@ -77,11 +77,14 @@ bool is_closing(const char& b)
 
 bool check_validity(const std::string& str)
 {
-    if ( str.length() == 0 || (str.length() == 2 && str[1] == map_braces[str[0]]) )
-            return true;
+    if (str.length() == 0)
+        return true;
 
     if (is_closing(str.front()) || is_opening(str.back()))
         return false;
+
+    if (str.length() == 2 && str[1] == map_braces[str[0]])
+        return true;
 
     const auto& b = str.front();
     unsigned int len = str.length();
