@@ -9,7 +9,6 @@
 #include <cstddef>         // std::size_t
 using namespace std;
 
-const int N = 6;
 std::map<char, char> map_braces = {
                                     {
                                         '(', ')'
@@ -82,11 +81,11 @@ bool check_validity(const std::string& str)
 
     const auto& b = str.front();
     vector<size_t> v_pos;
-    size_t pos = str.find(map_braces[b]); // find closet closing bracket
+    size_t pos = str.find(map_braces[b]); // find closing bracket
     while (pos != std::string::npos)
     {
         v_pos.push_back(pos);
-        pos = str.find(map_braces[b], ++pos); // find closet closing bracket
+        pos = str.find(map_braces[b], ++pos); // find all occurrences of closing bracket
     }
 
     const auto len = str.length();
