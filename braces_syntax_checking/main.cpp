@@ -2,7 +2,10 @@
 #include <string>
 #include <map>
 #include <set>
+#include <vector>
 #include <algorithm>
+#include <fstream>
+#include <sstream>
 #include <cstddef>         // std::size_t
 using namespace std;
 
@@ -20,46 +23,37 @@ std::map<char, char> map_braces = {
                                 };
 std::set<char> set_opening = { '(', '{', '[' };
 std::set<char> set_closing = { ')', '}', ']' };
-
-string ex_one = "{ } [ ] ( )";
-string ex_two = "{ } { [ ( ) ] } { { { ( ( ( [ ( ) ] ) ) ) } [ ( ) [ { } ] } }";
-string ex_three = "{ (  ) } ( ) ( [ { } ] )";
-string ex_four = "{";
-string ex_five = "{ } { [ ( ) ] } { { { ( ( ( [ ( ) ] ) ) ) } ( ) [ { } ] } }";
-
+std::vector<string> v_evaluate;
+std::vector<bool> v_result;
 
 /*
     0. if the string is empty it is valid
     1. select the first opening bracket, which is also the first character of the string
-    2. find next closet closing bracket at position pos
+    2. find closet closing bracket
     3. split the two strings & validate each string
         3.1. if they are invalid, repeat step 2 with another next closest closing bracket
         3.2. if they are valid, return true
     4. return false (all cases are invalid)
 */
 
+
 bool is_opening(const char &);
 bool is_closing(const char &);
 bool check_validity(const std::string&);
+void read_file();
+void write_file();
 
 int main()
 {
-    ex_one.erase(remove_if(ex_one.begin(), ex_one.end(), [](unsigned char x){return std::isspace(x);}),
-                    ex_one.end());
-    ex_two.erase(remove_if(ex_two.begin(), ex_two.end(), [](unsigned char x){return std::isspace(x);}),
-                    ex_two.end());
-    ex_three.erase(remove_if(ex_three.begin(), ex_three.end(), [](unsigned char x){return std::isspace(x);}),
-                    ex_three.end());
-    ex_four.erase(remove_if(ex_four.begin(), ex_four.end(), [](unsigned char x){return std::isspace(x);}),
-                    ex_four.end());
-    ex_five.erase(remove_if(ex_five.begin(), ex_five.end(), [](unsigned char x){return std::isspace(x);}),
-                    ex_five.end());
-
-    cout << check_validity(ex_one) << endl
-            << check_validity(ex_two) << endl
-            << check_validity(ex_three) << endl
-            << check_validity(ex_four) << endl
-            << check_validity(ex_five) << endl;
+    read_file();
+    for (auto& s : v_evaluate)
+    {
+        s.erase(remove_if(s.begin(), s.end(),
+                          [](unsigned char x){return std::isspace(x);}),
+                            s.end());
+        v_result.push_back(check_validity(s));
+    }
+    write_file();
 
     return 0;
 }
@@ -87,19 +81,16 @@ bool check_validity(const std::string& str)
         return true;
 
     const auto& b = str.front();
-    unsigned int len = str.length();
     vector<size_t> v_pos;
-    size_t pos = std::string::npos;
-    do
+    size_t pos = str.find(map_braces[b]); // find closet closing bracket
+    while (pos != std::string::npos)
     {
-        pos = str.find(map_braces[b], pos+1);
-        if (pos == string::npos)
-            break;
         v_pos.push_back(pos);
+        pos = str.find(map_braces[b], ++pos); // find closet closing bracket
     }
-    while (true);
 
-    for (auto& pos : v_pos)
+    const auto len = str.length();
+    for (const auto& pos : v_pos)
     {
         string str_one{""}, str_two{""};
 
@@ -112,4 +103,26 @@ bool check_validity(const std::string& str)
     }
 
     return false;
+}
+
+void read_file()
+{
+    std::ifstream input("./input.txt");
+    std::string t;
+
+    while (std::getline(input, t)) {
+        v_evaluate.push_back(t);
+    }
+
+    cout << "Total numbers of string read: " << v_evaluate.size() << endl;
+}
+
+void write_file()
+{
+    std::ofstream output_file("./output.txt");
+    for (const auto& b: v_result)
+    {
+        output_file << b << endl;
+    }
+    output_file.close();
 }
