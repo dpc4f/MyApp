@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1530963375 source:d:\gitrepos\myapp\braces_syntax_checking\main.cpp
+	<iostream>
+	<string>
+	<map>
+	<set>
+	<algorithm>
+	<cstddef>
+
