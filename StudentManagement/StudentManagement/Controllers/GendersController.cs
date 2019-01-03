@@ -1,0 +1,141 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using System.Net;
+using System.Web;
+using System.Web.Mvc;
+using StudentManagement.Models;
+using CrystalDecisions.CrystalReports.Engine;
+
+namespace StudentManagement.Controllers
+{
+    public class GendersController : Controller
+    {
+        private StudentMgtDataEntities1 db = new StudentMgtDataEntities1();
+
+        // GET: Genders
+        public ActionResult Index()
+        {
+            return View(db.Genders.ToList());
+        }
+
+        // GET: Genders/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Gender gender = db.Genders.Find(id);
+            if (gender == null)
+            {
+                return HttpNotFound();
+            }
+            return View(gender);
+        }
+
+        // GET: Genders/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // GET: Genders/ViewReport
+        public ActionResult ViewReport()
+        {
+            var g = (from b in db.Genders select b).ToList();
+            GenderList rpt = new GenderList();
+
+            rpt.Load();
+            rpt.SetDataSource(g);
+            var s = rpt.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+
+            return File(s, "application/pdf");
+        }
+
+        // POST: Genders/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "idGender,Sex")] Gender gender)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Genders.Add(gender);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(gender);
+        }
+
+        // GET: Genders/Edit/5
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Gender gender = db.Genders.Find(id);
+            if (gender == null)
+            {
+                return HttpNotFound();
+            }
+            return View(gender);
+        }
+
+        // POST: Genders/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "idGender,Sex")] Gender gender)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(gender).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(gender);
+        }
+
+        // GET: Genders/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Gender gender = db.Genders.Find(id);
+            if (gender == null)
+            {
+                return HttpNotFound();
+            }
+            return View(gender);
+        }
+
+        // POST: Genders/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Gender gender = db.Genders.Find(id);
+            db.Genders.Remove(gender);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+    }
+}
