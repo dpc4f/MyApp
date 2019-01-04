@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="StudentMgtDataModelStoreContainer" CdmEntityContainer="StudentMgtDataEntities">
+    <EntitySetMapping Name="Classes">
+      <EntityTypeMapping TypeName="StudentMgtDataModel.Class">
+        <MappingFragment StoreEntitySet="Classes">
+          <ScalarProperty Name="idClass" ColumnName="idClass" />
+          <ScalarProperty Name="idLecturer" ColumnName="idLecturer" />
+          <ScalarProperty Name="idSubject" ColumnName="idSubject" />
+          <ScalarProperty Name="TaughtYear" ColumnName="TaughtYear" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Departments">
+      <EntityTypeMapping TypeName="StudentMgtDataModel.Department">
+        <MappingFragment StoreEntitySet="Departments">
+          <ScalarProperty Name="idDept" ColumnName="idDept" />
+          <ScalarProperty Name="DeptName" ColumnName="DeptName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Enrolments">
+      <EntityTypeMapping TypeName="StudentMgtDataModel.Enrolment">
+        <MappingFragment StoreEntitySet="Enrolment">
+          <ScalarProperty Name="idClass" ColumnName="idClass" />
+          <ScalarProperty Name="idStudent" ColumnName="idStudent" />
+          <ScalarProperty Name="idStatus" ColumnName="idStatus" />
+          <ScalarProperty Name="GradePoint" ColumnName="GradePoint" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Genders">
+      <EntityTypeMapping TypeName="StudentMgtDataModel.Gender">
+        <MappingFragment StoreEntitySet="Genders">
+          <ScalarProperty Name="idGender" ColumnName="idGender" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Lecturers">
+      <EntityTypeMapping TypeName="StudentMgtDataModel.Lecturer">
+        <MappingFragment StoreEntitySet="Lecturers">
+          <ScalarProperty Name="idLecturer" ColumnName="idLecturer" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StdTitles">
+      <EntityTypeMapping TypeName="StudentMgtDataModel.StdTitle">
+        <MappingFragment StoreEntitySet="StdTitles">
+          <ScalarProperty Name="idTitle" ColumnName="idTitle" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="StudentTitle" ColumnName="StudentTitle" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Students">
+      <EntityTypeMapping TypeName="StudentMgtDataModel.Student">
+        <MappingFragment StoreEntitySet="Students">
+          <ScalarProperty Name="idStudent" ColumnName="idStudent" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="idGender" ColumnName="idGender" />
+          <ScalarProperty Name="idDept" ColumnName="idDept" />
+          <ScalarProperty Name="idTitle" ColumnName="idTitle" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Subjects">
+      <EntityTypeMapping TypeName="StudentMgtDataModel.Subject">
+        <MappingFragment StoreEntitySet="Subjects">
+          <ScalarProperty Name="idSubject" ColumnName="idSubject" />
+          <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
+          <ScalarProperty Name="idDept" ColumnName="idDept" />
+          <ScalarProperty Name="idTitle" ColumnName="idTitle" />
+          <ScalarProperty Name="Credits" ColumnName="Credits" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TheSchools">
+      <EntityTypeMapping TypeName="StudentMgtDataModel.TheSchool">
+        <MappingFragment StoreEntitySet="TheSchool">
+          <ScalarProperty Name="SchoolName" ColumnName="SchoolName" />
+          <ScalarProperty Name="BaseYear" ColumnName="BaseYear" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
