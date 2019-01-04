@@ -31,6 +31,9 @@ insert into dbo.Genders
 values (3, 'Other')
 go
 
+select * from Genders
+go
+
 /*
 	CREATE DEPARTMENT TABLE DATA
 */
@@ -105,6 +108,32 @@ go
 execute dbo.sp_CreateStudentData 1500
 go
 
+
+/*
+	CREATE CLASSES DATA TABLE
+*/
+
+--drop table if exists dbo.Classes
+--go
+
+
+/*
+	CREATE REQUIREMENTS DATA TABLE
+*/
+	
+--drop table if exists dbo.Requirements
+--go
+
+delete dbo.Requirements
+go
+
+insert into dbo.Requirements
+values (1, 'MIN_CREDITS_GRADUATION', 60)
+go
+
+insert into dbo.Requirements
+values (2, 'MIN_GPA', 2.00)
+go
 
 
 

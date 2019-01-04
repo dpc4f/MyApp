@@ -1,5 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="StudentMgtDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Classes">
+    <Key>
+      <PropertyRef Name="idClass" />
+    </Key>
+    <Property Name="idClass" Type="int" Nullable="false" />
+    <Property Name="ClassName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Credits" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DepartmentClass">
+    <Key>
+      <PropertyRef Name="idDept" />
+      <PropertyRef Name="idClass" />
+    </Key>
+    <Property Name="idDept" Type="int" Nullable="false" />
+    <Property Name="idClass" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="Departments">
     <Key>
       <PropertyRef Name="idDept" />
@@ -7,12 +23,28 @@
     <Property Name="idDept" Type="int" Nullable="false" />
     <Property Name="DeptName" Type="nvarchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="DeptStudents">
+    <Key>
+      <PropertyRef Name="idDept" />
+      <PropertyRef Name="idStudent" />
+    </Key>
+    <Property Name="idDept" Type="int" Nullable="false" />
+    <Property Name="idStudent" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="Genders">
     <Key>
       <PropertyRef Name="idGender" />
     </Key>
     <Property Name="idGender" Type="int" Nullable="false" />
     <Property Name="Sex" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Requirements">
+    <Key>
+      <PropertyRef Name="idNo" />
+    </Key>
+    <Property Name="idNo" Type="int" Nullable="false" />
+    <Property Name="ReqName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Content" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="School">
     <Key>
@@ -30,17 +62,52 @@
     <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
     <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="idGender" Type="int" />
-    <Property Name="idDept" Type="int" />
   </EntityType>
-  <Association Name="FK_Students_Departments">
-    <End Role="Departments" Type="Self.Departments" Multiplicity="0..1" />
-    <End Role="Students" Type="Self.Students" Multiplicity="*" />
+  <Association Name="FK_DepartmentClass_Classes">
+    <End Role="Classes" Type="Self.Classes" Multiplicity="1" />
+    <End Role="DepartmentClass" Type="Self.DepartmentClass" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Classes">
+        <PropertyRef Name="idClass" />
+      </Principal>
+      <Dependent Role="DepartmentClass">
+        <PropertyRef Name="idClass" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DepartmentClass_Departments">
+    <End Role="Departments" Type="Self.Departments" Multiplicity="1" />
+    <End Role="DepartmentClass" Type="Self.DepartmentClass" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Departments">
         <PropertyRef Name="idDept" />
       </Principal>
-      <Dependent Role="Students">
+      <Dependent Role="DepartmentClass">
         <PropertyRef Name="idDept" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DeptStudents_Departments">
+    <End Role="Departments" Type="Self.Departments" Multiplicity="1" />
+    <End Role="DeptStudents" Type="Self.DeptStudents" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Departments">
+        <PropertyRef Name="idDept" />
+      </Principal>
+      <Dependent Role="DeptStudents">
+        <PropertyRef Name="idDept" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DeptStudents_Students">
+    <End Role="Students" Type="Self.Students" Multiplicity="1" />
+    <End Role="DeptStudents" Type="Self.DeptStudents" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="idStudent" />
+      </Principal>
+      <Dependent Role="DeptStudents">
+        <PropertyRef Name="idStudent" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -57,13 +124,29 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="StudentMgtDataModelStoreContainer">
+    <EntitySet Name="Classes" EntityType="Self.Classes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DepartmentClass" EntityType="Self.DepartmentClass" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DeptStudents" EntityType="Self.DeptStudents" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Genders" EntityType="Self.Genders" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Requirements" EntityType="Self.Requirements" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="School" EntityType="Self.School" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK_Students_Departments" Association="Self.FK_Students_Departments">
+    <AssociationSet Name="FK_DepartmentClass_Classes" Association="Self.FK_DepartmentClass_Classes">
+      <End Role="Classes" EntitySet="Classes" />
+      <End Role="DepartmentClass" EntitySet="DepartmentClass" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DepartmentClass_Departments" Association="Self.FK_DepartmentClass_Departments">
       <End Role="Departments" EntitySet="Departments" />
+      <End Role="DepartmentClass" EntitySet="DepartmentClass" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DeptStudents_Departments" Association="Self.FK_DeptStudents_Departments">
+      <End Role="Departments" EntitySet="Departments" />
+      <End Role="DeptStudents" EntitySet="DeptStudents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DeptStudents_Students" Association="Self.FK_DeptStudents_Students">
       <End Role="Students" EntitySet="Students" />
+      <End Role="DeptStudents" EntitySet="DeptStudents" />
     </AssociationSet>
     <AssociationSet Name="FK_Students_Genders" Association="Self.FK_Students_Genders">
       <End Role="Genders" EntitySet="Genders" />

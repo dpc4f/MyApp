@@ -7,13 +7,13 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using StudentManagement.Models;
-using CrystalDecisions.CrystalReports.Engine;
+using StudentManagement.Reporting;
 
 namespace StudentManagement.Controllers
 {
     public class GendersController : Controller
     {
-        private StudentMgtDataEntities1 db = new StudentMgtDataEntities1();
+        private StudentMgtDataEntities2 db = new StudentMgtDataEntities2();
 
         // GET: Genders
         public ActionResult Index()
@@ -40,19 +40,6 @@ namespace StudentManagement.Controllers
         public ActionResult Create()
         {
             return View();
-        }
-
-        // GET: Genders/ViewReport
-        public ActionResult ViewReport()
-        {
-            var g = (from b in db.Genders select b).ToList();
-            GenderList rpt = new GenderList();
-
-            rpt.Load();
-            rpt.SetDataSource(g);
-            var s = rpt.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
-
-            return File(s, "application/pdf");
         }
 
         // POST: Genders/Create
@@ -127,6 +114,19 @@ namespace StudentManagement.Controllers
             db.Genders.Remove(gender);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        // GET: Genders/ViewReport
+        public ActionResult ViewReport()
+        {
+            var g = (from b in db.Genders select b).ToList();
+            GenderRpt rpt = new GenderRpt();
+
+            rpt.Load();
+            rpt.SetDataSource(g);
+            var s = rpt.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+
+            return File(s, "application/pdf");
         }
 
         protected override void Dispose(bool disposing)

@@ -1,12 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="StudentMgtDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Class">
+    <Key>
+      <PropertyRef Name="idClass" />
+    </Key>
+    <Property Name="idClass" Type="Int32" Nullable="false" />
+    <Property Name="ClassName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Credits" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Departments" Relationship="Self.DepartmentClass" FromRole="Classes" ToRole="Departments" />
+  </EntityType>
   <EntityType Name="Department">
     <Key>
       <PropertyRef Name="idDept" />
     </Key>
     <Property Name="idDept" Type="Int32" Nullable="false" />
     <Property Name="DeptName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Students" Relationship="Self.FK_Students_Departments" FromRole="Departments" ToRole="Students" />
+    <NavigationProperty Name="Classes" Relationship="Self.DepartmentClass" FromRole="Departments" ToRole="Classes" />
+    <NavigationProperty Name="Students" Relationship="Self.DeptStudents" FromRole="Departments" ToRole="Students" />
   </EntityType>
   <EntityType Name="Gender">
     <Key>
@@ -15,6 +25,14 @@
     <Property Name="idGender" Type="Int32" Nullable="false" />
     <Property Name="Sex" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Students" Relationship="Self.FK_Students_Genders" FromRole="Genders" ToRole="Students" />
+  </EntityType>
+  <EntityType Name="Requirement">
+    <Key>
+      <PropertyRef Name="idNo" />
+    </Key>
+    <Property Name="idNo" Type="Int32" Nullable="false" />
+    <Property Name="ReqName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Content" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="School">
     <Key>
@@ -32,22 +50,9 @@
     <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="idGender" Type="Int32" />
-    <Property Name="idDept" Type="Int32" />
-    <NavigationProperty Name="Department" Relationship="Self.FK_Students_Departments" FromRole="Students" ToRole="Departments" />
     <NavigationProperty Name="Gender" Relationship="Self.FK_Students_Genders" FromRole="Students" ToRole="Genders" />
+    <NavigationProperty Name="Departments" Relationship="Self.DeptStudents" FromRole="Students" ToRole="Departments" />
   </EntityType>
-  <Association Name="FK_Students_Departments">
-    <End Role="Departments" Type="Self.Department" Multiplicity="0..1" />
-    <End Role="Students" Type="Self.Student" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Departments">
-        <PropertyRef Name="idDept" />
-      </Principal>
-      <Dependent Role="Students">
-        <PropertyRef Name="idDept" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Students_Genders">
     <End Role="Genders" Type="Self.Gender" Multiplicity="0..1" />
     <End Role="Students" Type="Self.Student" Multiplicity="*" />
@@ -60,17 +65,31 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="StudentMgtDataEntities1" annotation:LazyLoadingEnabled="true">
+  <Association Name="DepartmentClass">
+    <End Role="Classes" Type="Self.Class" Multiplicity="*" />
+    <End Role="Departments" Type="Self.Department" Multiplicity="*" />
+  </Association>
+  <Association Name="DeptStudents">
+    <End Role="Departments" Type="Self.Department" Multiplicity="*" />
+    <End Role="Students" Type="Self.Student" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="StudentMgtDataEntities2" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Classes" EntityType="Self.Class" />
     <EntitySet Name="Departments" EntityType="Self.Department" />
     <EntitySet Name="Genders" EntityType="Self.Gender" />
+    <EntitySet Name="Requirements" EntityType="Self.Requirement" />
     <EntitySet Name="Schools" EntityType="Self.School" />
     <EntitySet Name="Students" EntityType="Self.Student" />
-    <AssociationSet Name="FK_Students_Departments" Association="Self.FK_Students_Departments">
-      <End Role="Departments" EntitySet="Departments" />
-      <End Role="Students" EntitySet="Students" />
-    </AssociationSet>
     <AssociationSet Name="FK_Students_Genders" Association="Self.FK_Students_Genders">
       <End Role="Genders" EntitySet="Genders" />
+      <End Role="Students" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="DepartmentClass" Association="Self.DepartmentClass">
+      <End Role="Classes" EntitySet="Classes" />
+      <End Role="Departments" EntitySet="Departments" />
+    </AssociationSet>
+    <AssociationSet Name="DeptStudents" Association="Self.DeptStudents">
+      <End Role="Departments" EntitySet="Departments" />
       <End Role="Students" EntitySet="Students" />
     </AssociationSet>
   </EntityContainer>

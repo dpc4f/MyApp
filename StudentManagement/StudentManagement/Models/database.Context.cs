@@ -13,10 +13,10 @@ namespace StudentManagement.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class StudentMgtDataEntities1 : DbContext
+    public partial class StudentMgtDataEntities2 : DbContext
     {
-        public StudentMgtDataEntities1()
-            : base("name=StudentMgtDataEntities1")
+        public StudentMgtDataEntities2()
+            : base("name=StudentMgtDataEntities2")
         {
         }
     
@@ -25,8 +25,10 @@ namespace StudentManagement.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Class> Classes { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<Gender> Genders { get; set; }
+        public virtual DbSet<Requirement> Requirements { get; set; }
         public virtual DbSet<School> Schools { get; set; }
         public virtual DbSet<Student> Students { get; set; }
     }

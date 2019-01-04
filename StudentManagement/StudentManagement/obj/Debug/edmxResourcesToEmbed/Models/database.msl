@@ -1,6 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="StudentMgtDataModelStoreContainer" CdmEntityContainer="StudentMgtDataEntities1">
+  <EntityContainerMapping StorageEntityContainer="StudentMgtDataModelStoreContainer" CdmEntityContainer="StudentMgtDataEntities2">
+    <EntitySetMapping Name="Classes">
+      <EntityTypeMapping TypeName="StudentMgtDataModel.Class">
+        <MappingFragment StoreEntitySet="Classes">
+          <ScalarProperty Name="idClass" ColumnName="idClass" />
+          <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+          <ScalarProperty Name="Credits" ColumnName="Credits" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Departments">
       <EntityTypeMapping TypeName="StudentMgtDataModel.Department">
         <MappingFragment StoreEntitySet="Departments">
@@ -14,6 +23,15 @@
         <MappingFragment StoreEntitySet="Genders">
           <ScalarProperty Name="idGender" ColumnName="idGender" />
           <ScalarProperty Name="Sex" ColumnName="Sex" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Requirements">
+      <EntityTypeMapping TypeName="StudentMgtDataModel.Requirement">
+        <MappingFragment StoreEntitySet="Requirements">
+          <ScalarProperty Name="idNo" ColumnName="idNo" />
+          <ScalarProperty Name="ReqName" ColumnName="ReqName" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -33,9 +51,24 @@
           <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
           <ScalarProperty Name="LastName" ColumnName="LastName" />
           <ScalarProperty Name="idGender" ColumnName="idGender" />
-          <ScalarProperty Name="idDept" ColumnName="idDept" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <AssociationSetMapping Name="DepartmentClass" TypeName="StudentMgtDataModel.DepartmentClass" StoreEntitySet="DepartmentClass">
+      <EndProperty Name="Classes">
+        <ScalarProperty Name="idClass" ColumnName="idClass" />
+      </EndProperty>
+      <EndProperty Name="Departments">
+        <ScalarProperty Name="idDept" ColumnName="idDept" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="DeptStudents" TypeName="StudentMgtDataModel.DeptStudents" StoreEntitySet="DeptStudents">
+      <EndProperty Name="Departments">
+        <ScalarProperty Name="idDept" ColumnName="idDept" />
+      </EndProperty>
+      <EndProperty Name="Students">
+        <ScalarProperty Name="idStudent" ColumnName="idStudent" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

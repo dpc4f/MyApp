@@ -12,21 +12,19 @@ namespace StudentManagement.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Department
+    public partial class Class
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Department()
+        public Class()
         {
-            this.Classes = new HashSet<Class>();
-            this.Students = new HashSet<Student>();
+            this.Departments = new HashSet<Department>();
         }
     
-        public int idDept { get; set; }
-        public string DeptName { get; set; }
+        public int idClass { get; set; }
+        public string ClassName { get; set; }
+        public int Credits { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Class> Classes { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Student> Students { get; set; }
+        public virtual ICollection<Department> Departments { get; set; }
     }
 }
