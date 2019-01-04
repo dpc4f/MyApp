@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.Shared;
 using StudentManagement.v0._03.Models;
 
 namespace StudentManagement.v0._03.Controllers
@@ -116,14 +118,22 @@ namespace StudentManagement.v0._03.Controllers
         }
 
         // GET: Genders/ViewReport
-        public ActionResult ViewReport()
+        public ActionResult ViewReport(int? id)
         {
-            var list = (from b in db.StudentSeniorities select b).ToList();
-            Reports.StudentSeniorities rpt = new Reports.StudentSeniorities();
+            //ParameterFields parameterFields = new ParameterFields();
+            //ParameterField parameterField = new ParameterField();
+            //ParameterDiscreteValue parameterDiscreteValue = new ParameterDiscreteValue();
+            //parameterField.Name = "@stYear";
+            //parameterDiscreteValue.Value = stYear;
+            //parameterField.CurrentValues.Add(parameterDiscreteValue);
+            //parameterFields.Add(parameterField);
 
-            rpt.Load();
-            rpt.SetDataSource(list);
-            var s = rpt.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            ReportDocument reportDocument = new ReportDocument();
+            reportDocument.Load(Server.MapPath("~/Reports/StudentSeniorities.rpt"));
+            reportDocument.SetDatabaseLogon("sa", "1234", "DESKTOP-3J745NI\\PROCASQLSERVER", "stmgmt", false);
+            reportDocument.SetParameterValue("stYear", id);
+
+            var s = reportDocument.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
 
             return File(s, "application/pdf");
         }

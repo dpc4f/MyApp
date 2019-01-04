@@ -26,5 +26,6 @@ namespace StudentManagement.v0._03.Models
         }
     
         public virtual DbSet<StudentSeniority> StudentSeniorities { get; set; }
+        public virtual DbSet<Student> Students { get; set; }
     }
 }

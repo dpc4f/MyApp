@@ -1,4 +1,4 @@
-use stmgt;
+use stmgmt;
 go
 
 /*
@@ -28,6 +28,18 @@ values(4, 'Senior', 4)
 insert into dbo.StudentSeniorities
 values(5, 'Senior 2', 5)
 go
+
+drop procedure sp_GetSeniority;
+go
+
+create procedure sp_GetSeniority
+	@stYear int
+as
+	select *
+	from dbo.StudentSeniorities
+	where Years = @stYear;
+go
+
 
 /*
 	CREATE GENDER TABLE DATA
@@ -101,6 +113,17 @@ go
 	CREATE STUDENT TABLE DATA
 */
 delete dbo.Students
+go
+
+drop procedure if exists sp_GetStudentData
+go
+
+create procedure sp_GetStudentData
+	@stID int
+as
+	select *
+	from dbo.Students
+	where idStudent = @stID
 go
 
 drop procedure if exists sp_CreateStudentData

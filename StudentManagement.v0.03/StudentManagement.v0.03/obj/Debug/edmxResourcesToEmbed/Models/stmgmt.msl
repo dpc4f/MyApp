@@ -10,5 +10,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Students">
+      <EntityTypeMapping TypeName="stmgmtModel.Student">
+        <MappingFragment StoreEntitySet="Students">
+          <ScalarProperty Name="idTitle" ColumnName="idTitle" />
+          <ScalarProperty Name="idDept" ColumnName="idDept" />
+          <ScalarProperty Name="idGender" ColumnName="idGender" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="idStudent" ColumnName="idStudent" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
