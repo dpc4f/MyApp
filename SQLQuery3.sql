@@ -2,7 +2,7 @@ use stmgmt;
 go
 
 /*
-	CREATE SCHOOL TABLE DATA
+	SCHOOL TABLE DATA
 */
 delete dbo.TheSchool
 go
@@ -11,8 +11,11 @@ insert into dbo.TheSchool
 values('The School Of Liberty And Arts', 1960, 59)
 go
 
+select * from dbo.TheSchool
+go
+
 /*
-	CREATE STUDENTSENIORITY TABLE DATA
+	STUDENTSENIORITY TABLE DATA
 */
 delete dbo.StudentSeniority
 go
@@ -32,6 +35,11 @@ go
 drop procedure sp_GetSeniority;
 go
 
+
+if (OBJECT_ID('sp_GetSeniority') is not null)
+	drop procedure dbo.sp_GetSeniority
+go
+
 create procedure sp_GetSeniority
 	@stYear int
 as
@@ -42,7 +50,7 @@ go
 
 
 /*
-	CREATE GENDER TABLE DATA
+	GENDER TABLE DATA
 */
 
 delete dbo.Genders
@@ -64,29 +72,35 @@ select * from Genders
 go
 
 /*
-	CREATE ENROLSTATUS TABLE DATA
+	ENROLSTATUS TABLE DATA
 */
-delete dbo.EnrolmentStatus
+delete dbo.EnrollmentStatuses
 go
 
-insert into dbo.EnrolmentStatus
-values (1, 'RollIn')
+insert into dbo.EnrollmentStatuses
+values (1, 'RollingIn')
 go
 
-insert into dbo.EnrolmentStatus
-values (2, 'Finished')
+insert into dbo.EnrollmentStatuses
+values (2, 'Passed')
 go
 
+insert into dbo.EnrollmentStatuses
+values (3, 'Failed')
+go
 
+select * from dbo.EnrollmentStatuses
+go
 
 /*
-	CREATE DEPARTMENT TABLE DATA
+	DEPARTMENT TABLE DATA
 */
 delete dbo.Students
 delete dbo.Departments 
 go
 
-drop procedure if exists sp_CreateDepartmentData
+if (OBJECT_ID('sp_CreateDepartmentData') is not null)
+	drop procedure dbo.sp_CreateDepartmentData
 go
 
 create procedure sp_CreateDepartmentData 
@@ -109,13 +123,17 @@ go
 execute dbo.sp_CreateDepartmentData 30
 go
 
+select * from dbo.Departments
+go
+
 /*
-	CREATE STUDENT TABLE DATA
+	STUDENT TABLE DATA
 */
 delete dbo.Students
 go
 
-drop procedure if exists sp_GetStudentData
+if (OBJECT_ID('sp_GetStudentData') is not null)
+	drop procedure dbo.sp_GetStudentData
 go
 
 create procedure sp_GetStudentData
@@ -126,7 +144,8 @@ as
 	where idStudent = @stID
 go
 
-drop procedure if exists sp_CreateStudentData
+if (OBJECT_ID('sp_CreateStudentData') is not null)
+	drop procedure dbo.sp_CreateStudentData
 go
 
 create procedure sp_CreateStudentData
@@ -152,8 +171,8 @@ as
 		while @id <= @MaxStudent 
 		begin
 			set @idStr = cast(@id as varchar)
-			insert into StudentMgtData.dbo.Students
-			values ((@idDept-1)*1500 + @id, 'First ' + @idStr, 'Middle ' + @idStr, 'Last ' + @idStr, 1, @idDept)
+			insert into dbo.Students
+			values ((@idDept-1)*1500 + @id, 'First ' + @idStr, 'Middle ' + @idStr, 'Last ' + @idStr, 1, @idDept, 1)
 			set @id = @id + 1
 		end
 	
@@ -164,6 +183,20 @@ go
 execute dbo.sp_CreateStudentData 1500
 go
 
+if (OBJECT_ID('sp_GetStudentSummary') is not null)
+	drop procedure dbo.sp_GetStudentSummary
+go
+
+create procedure sp_GetStudentSummary
+	@stID int
+as
+	select *
+	from Students as s, Departments as d, TheSchool as t
+	where s.idStudent = @stID and s.idDept = d.idDept
+go
+
+execute sp_GetStudentSummary 6
+go
 
 /*
 	CREATE CLASSES DATA TABLE

@@ -117,7 +117,7 @@ namespace StudentManagement.v0._03.Controllers
             return RedirectToAction("Index");
         }
 
-        // GET: Genders/ViewReport
+        // GET: Seniorities/ViewReport
         public ActionResult ViewReport(int? id)
         {
             //ParameterFields parameterFields = new ParameterFields();

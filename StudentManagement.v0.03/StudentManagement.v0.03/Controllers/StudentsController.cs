@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using CrystalDecisions.CrystalReports.Engine;
 using StudentManagement.v0._03.Models;
 
 namespace StudentManagement.v0._03.Controllers
@@ -115,20 +116,17 @@ namespace StudentManagement.v0._03.Controllers
             return RedirectToAction("Index");
         }
 
-        //// GET: Students/ViewReport
-        //public ActionResult ViewReport(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Student student = db.Students.Find(id);
-        //    if (student == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(student);
-        //}
+        // GET: Students/ViewReport
+        public ActionResult ViewReport(int? id)
+        {
+            ReportDocument reportDocument = new ReportDocument();
+            reportDocument.Load(Server.MapPath("~/Reports/StudentSummary.rpt"));
+            reportDocument.SetDatabaseLogon("sa", "1234", "DESKTOP-3J745NI\\PROCASQLSERVER", "stmgmt", false);
+            reportDocument.SetParameterValue("stID", id);
+            var s = reportDocument.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+
+            return File(s, "application/pdf");
+        }
 
         protected override void Dispose(bool disposing)
         {
