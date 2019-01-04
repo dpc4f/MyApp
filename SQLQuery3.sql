@@ -35,6 +35,22 @@ select * from Genders
 go
 
 /*
+	CREATE ENROLSTATUS TABLE DATA
+*/
+delete dbo.EnrolmentStatus
+go
+
+insert into dbo.EnrolmentStatus
+values (1, 'RollIn')
+go
+
+insert into dbo.EnrolmentStatus
+values (2, 'Finished')
+go
+
+
+
+/*
 	CREATE DEPARTMENT TABLE DATA
 */
 delete dbo.Students
