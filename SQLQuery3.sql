@@ -1,16 +1,33 @@
-use StudentMgtData;
+use stmgt;
 go
 
 /*
 	CREATE SCHOOL TABLE DATA
 */
-delete dbo.School
+delete dbo.TheSchool
 go
 
-insert into dbo.School
-values(1, 'The School Of Liberty And Arts')
+insert into dbo.TheSchool
+values('The School Of Liberty And Arts', 1960, 59)
 go
 
+/*
+	CREATE STUDENTSENIORITY TABLE DATA
+*/
+delete dbo.StudentSeniority
+go
+
+insert into dbo.StudentSeniorities
+values(1, 'Freshman', 1)
+insert into dbo.StudentSeniorities
+values(2, 'Sophomore', 2)
+insert into dbo.StudentSeniorities
+values(3, 'Junior', 3)
+insert into dbo.StudentSeniorities
+values(4, 'Senior', 4)
+insert into dbo.StudentSeniorities
+values(5, 'Senior 2', 5)
+go
 
 /*
 	CREATE GENDER TABLE DATA

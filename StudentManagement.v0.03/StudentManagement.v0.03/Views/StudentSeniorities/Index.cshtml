@@ -1,0 +1,43 @@
+﻿@model IEnumerable<StudentManagement.v0._03.Models.StudentSeniority>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.StudentTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Years)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.StudentTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Years)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idSeniority }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idSeniority }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idSeniority })
+        </td>
+    </tr>
+}
+
+</table>
+
+<p>
+    @Html.ActionLink("View Report", "ViewReport")
+</p>
