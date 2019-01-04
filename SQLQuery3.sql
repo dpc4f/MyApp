@@ -153,3 +153,14 @@ go
 
 
 
+/*
+	STORE PROCEDURE TO RETRIEVE STUDENT SUMMARIZED INFORMATION
+*/
+
+create procedure sp_StudentInfor
+	@ID int
+as
+	select *
+	from Students
+	where idStudent = @ID
+go

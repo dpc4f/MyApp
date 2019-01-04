@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4c9ca41666a04e228c2080156d0d58b5" Name="Diagram1">
+        <EntityTypeShape EntityType="StudentMgtDataModel.Class" Width="1.5" PointX="8.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentMgtDataModel.Department" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentMgtDataModel.Enrolment" Width="1.5" PointX="2.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentMgtDataModel.Gender" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentMgtDataModel.Lecturer" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentMgtDataModel.StdTitle" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentMgtDataModel.Student" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentMgtDataModel.Subject" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentMgtDataModel.TheSchool" Width="1.5" PointX="4.75" PointY="8.25" IsExpanded="true" />
+        <AssociationConnector Association="StudentMgtDataModel.FK_Classes_Lecturers" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentMgtDataModel.FK_Classes_Subjects" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentMgtDataModel.FK_Students_Departments" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentMgtDataModel.FK_Subjects_Departments" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentMgtDataModel.FK_Students_Genders" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentMgtDataModel.FK_Students_StdTitles" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentMgtDataModel.FK_Subjects_StdTitles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

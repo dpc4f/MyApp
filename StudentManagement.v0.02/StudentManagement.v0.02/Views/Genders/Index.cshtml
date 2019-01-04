@@ -1,0 +1,37 @@
+﻿@model IEnumerable<StudentManagement.v0._02.Models.Gender>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Sex)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sex)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idGender }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idGender }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idGender })
+        </td>
+    </tr>
+}
+
+</table>
+
+<div>
+    @Html.ActionLink("View report", "ViewReport")
+</div>
