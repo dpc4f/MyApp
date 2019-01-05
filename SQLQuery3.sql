@@ -20,7 +20,7 @@ delete dbo.TheSchool
 go
 
 insert into dbo.TheSchool
-values('UNIVERSITY OF LIBERTY AND ARTS', '1960-04-06', 0)
+values('UNIVERSITY OF COMPUTER SCIENCES AND PHYSICS', '1960-04-06', 0)
 go
 
 select * from dbo.TheSchool
@@ -160,17 +160,106 @@ as
 
 	while @id <= @MaxDept
 	begin
-		set @idStr = cast(@id as varchar)
+		select @idStr = stmgmt.dbo.fnNumberToWords (@id)
 		insert into dbo.Departments
 		values (@id, 'Dept ' + @idStr)
 		set @id = @id + 1
 	end
 go
 
-execute dbo.sp_CreateDepartmentData 30
+execute dbo.sp_CreateDepartmentData 17
 go
 
 select * from dbo.Departments
+go
+
+
+create procedure sp_UpdateDepartmentName 
+as
+	declare @id int
+	declare @idStr varchar(50)
+	declare @maxDept int
+
+	set @id = 1
+	set @maxDept = (select count(*) from stmgmt.dbo.Departments)
+	while @id <= @maxDept
+	begin
+		select @idStr = stmgmt.dbo.fnNumberToWords (@id)
+		
+		update stmgmt.dbo.Departments
+		set DeptName = 'Dept ' + @idStr
+		where idDept = @id
+
+		set @id = @id + 1
+	end
+go
+
+exec sp_UpdateDepartmentName
+go
+
+/*
+    Splits string into parts delimitered with specified character.
+*/
+CREATE FUNCTION [dbo].[SDF_SplitString]
+(
+    @sString nvarchar(2048),
+    @cDelimiter nchar(1)
+)
+RETURNS @tParts TABLE ( part nvarchar(2048) )
+AS
+BEGIN
+    if @sString is null return
+    declare @iStart int,
+            @iPos int
+    if substring( @sString, 1, 1 ) = @cDelimiter 
+    begin
+        set @iStart = 2
+        insert into @tParts
+        values( null )
+    end
+    else 
+        set @iStart = 1
+    while 1=1
+    begin
+        set @iPos = charindex( @cDelimiter, @sString, @iStart )
+        if @iPos = 0
+            set @iPos = len( @sString )+1
+        if @iPos - @iStart > 0          
+            insert into @tParts
+            values  ( substring( @sString, @iStart, @iPos-@iStart ))
+        else
+            insert into @tParts
+            values( null )
+        set @iStart = @iPos+1
+        if @iStart > len( @sString ) 
+            break
+    end
+    RETURN
+
+END
+
+SELECT * FROM (SELECT ROW_NUMBER () OVER (ORDER BY part desc) AS RowNum, * FROM
+            SDF_SplitString ('Dept 2', ' ')) sub
+WHERE RowNum = 1
+go
+
+create function fn_ConvertDeptName (@oldName varchar)
+		returns varchar
+	as
+begin
+	declare @numStr varchar 
+
+	SELECT @numStr = part FROM (SELECT ROW_NUMBER () OVER (ORDER BY part desc) AS RowNum, * FROM
+            SDF_SplitString ('oldName', ' ')) sub
+	WHERE RowNum = 2
+	
+	RETURN 'Dept ' + dbo.fnNumberToWords(cast(@numStr as int))
+end
+
+drop function fn_ConvertDeptName
+
+update stmgmt.dbo.Departments
+set DeptName = dbo.fn_ConvertDeptName(DeptName);
 go
 
 /*
@@ -194,6 +283,8 @@ as
 	from dbo.Students
 	where idStudent = @stID
 go
+
+exec sp_helptext fnNumberToWords
 
 if (OBJECT_ID('sp_CreateStudentData') is not null)
 	drop procedure dbo.sp_CreateStudentData
@@ -240,15 +331,16 @@ if (OBJECT_ID('sp_GetStudentSummary') is not null)
 	drop procedure dbo.sp_GetStudentSummary
 go
 
+use stmgmt;
 create procedure sp_GetStudentSummary
 	@stID int
 as
 	select * 
-	from Students as s, Departments as d, TheSchool as t 
-	where s.idStudent = @stID and s.idDept = d.idDept
+	from Students as s, Departments as d, TheSchool as t, Genders as g, Enrollment as e, EnrollmentStatuses as es
+	where s.idStudent = @stID and s.idDept = d.idDept and s.idGender = g.idGender and e.idStudent = s.idStudent and e.idStatus = es.idStatus
 go
 
-execute sp_GetStudentSummary;
+execute sp_GetStudentSummary 1
 go
 
 /*
@@ -350,6 +442,9 @@ go
 --drop table if exists dbo.Classes
 --go
 
+drop procedure sp_CreateClassData
+go
+
 -- if this year hasn't had a class for the subject, create two classes for each subject
 create procedure sp_CreateClassData
   as
@@ -371,7 +466,7 @@ begin
 	
 	while @idDept <= @maxDept
 	begin
-		set @idDeptStr = cast(@idDept as varchar)
+		select @idDeptStr = dbo.fnNumberToWords (@idDept)
 		set @idSeniority = 1
 		while @idSeniority <= @maxSeniority
 		begin
@@ -426,3 +521,115 @@ as
 	from Students
 	where idStudent = @ID
 go
+
+
+use stmgmt;
+go
+
+CREATE FUNCTION fnNumberToWords(@Number as BIGINT)
+
+    RETURNS VARCHAR(1024)
+
+AS
+
+BEGIN
+
+      DECLARE @Below20 TABLE (ID int identity(0,1), Word varchar(32))
+
+      DECLARE @Below100 TABLE (ID int identity(2,1), Word varchar(32))
+
+      INSERT @Below20 (Word) VALUES
+
+                        ( 'Zero'), ('One'),( 'Two' ), ( 'Three'),
+
+                        ( 'Four' ), ( 'Five' ), ( 'Six' ), ( 'Seven' ),
+
+                        ( 'Eight'), ( 'Nine'), ( 'Ten'), ( 'Eleven' ),
+
+                        ( 'Twelve' ), ( 'Thirteen' ), ( 'Fourteen'),
+
+                        ( 'Fifteen' ), ('Sixteen' ), ( 'Seventeen'),
+
+                        ('Eighteen' ), ( 'Nineteen' )
+
+       INSERT @Below100 VALUES ('Twenty'), ('Thirty'),('Forty'), ('Fifty'),
+
+                               ('Sixty'), ('Seventy'), ('Eighty'), ('Ninety')
+
+DECLARE @English varchar(1024) =
+
+(
+
+  SELECT Case
+
+    WHEN @Number = 0 THEN  ''
+
+    WHEN @Number BETWEEN 1 AND 19
+
+      THEN (SELECT Word FROM @Below20 WHERE ID=@Number)
+
+   WHEN @Number BETWEEN 20 AND 99  
+
+     THEN  (SELECT Word FROM @Below100 WHERE ID=@Number/10)+ '-' +
+
+           dbo.fnNumberToWords( @Number % 10)
+
+   WHEN @Number BETWEEN 100 AND 999  
+
+     THEN  (dbo.fnNumberToWords( @Number / 100))+' Hundred '+
+
+         dbo.fnNumberToWords( @Number % 100)
+
+   WHEN @Number BETWEEN 1000 AND 999999  
+
+     THEN  (dbo.fnNumberToWords( @Number / 1000))+' Thousand '+
+
+         dbo.fnNumberToWords( @Number % 1000) 
+
+   WHEN @Number BETWEEN 1000000 AND 999999999  
+
+     THEN  (dbo.fnNumberToWords( @Number / 1000000))+' Million '+
+
+         dbo.fnNumberToWords( @Number % 1000000)
+
+   WHEN @Number BETWEEN 1000000000 AND 999999999999  
+
+     THEN  (dbo.fnNumberToWords( @Number / 1000000000))+' Billion '+
+
+         dbo.fnNumberToWords( @Number % 1000000000)
+
+   WHEN @Number BETWEEN 1000000000000 AND 999999999999999  
+
+     THEN  (dbo.fnNumberToWords( @Number / 1000000000000))+' Trillion '+
+
+         dbo.fnNumberToWords( @Number % 1000000000000)
+
+  WHEN @Number BETWEEN 1000000000000000 AND 999999999999999999  
+
+     THEN  (dbo.fnNumberToWords( @Number / 1000000000000000))+' Quadrillion '+
+
+         dbo.fnNumberToWords( @Number % 1000000000000000)
+
+  WHEN @Number BETWEEN 1000000000000000000 AND 999999999999999999999  
+
+     THEN  (dbo.fnNumberToWords( @Number / 1000000000000000000))+' Quintillion '+
+
+         dbo.fnNumberToWords( @Number % 1000000000000000000)
+
+        ELSE ' INVALID INPUT' END
+
+)
+
+
+
+SELECT @English = RTRIM(@English)
+
+SELECT @English = RTRIM(LEFT(@English,len(@English)-1))
+
+                 WHERE RIGHT(@English,1)='-'
+
+RETURN (@English)
+
+END
+
+GO
