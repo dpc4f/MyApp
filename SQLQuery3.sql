@@ -368,18 +368,18 @@ begin
 	
 	while @idDept <= @maxDept
 	begin
-		set @idDeptStr = cast(@idDept as varchar)
+		set @idDeptStr = 'D.' + dbo.fnNumberToWords(@idDept)
 		set @idSeniority = 1
 		while @idSeniority <= @maxSeniority
 		begin
-			set @idSeniorStr = cast(@idSeniority as varchar)
+			set @idSeniorStr = 'ST.' + dbo.fnNumberToWords(@idSeniority)
 			set @id = 1
 			while @id <= @MaxSubject 
 			begin
-				set @idStr = cast(@id as varchar)
+				set @idStr = 'S.' + dbo.fnNumberToWords(@id)
 				
 				insert into dbo.Subjects
-				values (@nCount, 'Subject ' + @idDeptStr + '.' + @idSeniorStr + '.' + @idStr, 3, @idDept, @idSeniority)
+				values (@nCount, 'Subject ' + @idDeptStr + '_' + @idSeniorStr + '_' + @idStr, 3, @idDept, @idSeniority)
 				
 				set @id = @id + 1
 				set @nCount = @nCount + 1
