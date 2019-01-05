@@ -1,21 +1,66 @@
 use stmgmt;
 go
 
+create procedure sp_GetCurrentDate
+ as
+begin
+	SELECT CAST(GETDATE() AS DATE) as CurrentDate;
+end
+go
+
+exec sp_GetCurrentDate;
+go
+
+drop procedure sp_GetCurrentDate
+
 /*
-	SCHOOL TABLE DATA
+	SCHOOL TABLE 
 */
 delete dbo.TheSchool
 go
 
 insert into dbo.TheSchool
-values('The School Of Liberty And Arts', 1960, 59)
+values('UNIVERSITY OF LIBERTY AND ARTS', '1960-04-06', 0)
 go
 
 select * from dbo.TheSchool
 go
 
+
+
+USE msdb;
+GO
+EXEC dbo.sp_add_schedule
+    @schedule_name = N'[stmgmt].[dbo].[sp_UpdateYears]',
+    @freq_type = 1,
+    @active_start_time = 063000 ;
+GO  
+
+EXEC dbo.sp_delete_schedule
+	@schedule_name = N'sp_TheSchoolAutoRun';
+GO
+
+
+create procedure sp_UpdateYears
+ as
+begin
+	declare @curDate Date
+	declare @difYear int
+	set @curDate = (SELECT CAST(GETDATE() AS DATE))
+	set @difYear = (select DATEDIFF(year, (select FoundationDate from TheSchool), @curDate))
+	
+	update TheSchool set Years = @difYear
+end
+go
+
+exec sp_UpdateYears
+go
+
+drop procedure sp_UpdateYears
+go
+
 /*
-	STUDENTSENIORITY TABLE DATA
+	STUDENTSENIORITY TABLE 
 */
 delete dbo.StudentSeniority
 go
@@ -42,15 +87,17 @@ go
 
 create procedure sp_GetSeniority
 	@stYear int
-as
+ as
+begin
 	select *
 	from dbo.StudentSeniorities
 	where Years = @stYear;
+end
 go
 
 
 /*
-	GENDER TABLE DATA
+	GENDER TABLE 
 */
 
 delete dbo.Genders
@@ -72,7 +119,7 @@ select * from Genders
 go
 
 /*
-	ENROLSTATUS TABLE DATA
+	ENROLSTATUS TABLE 
 */
 delete dbo.EnrollmentStatuses
 go
@@ -93,7 +140,7 @@ select * from dbo.EnrollmentStatuses
 go
 
 /*
-	DEPARTMENT TABLE DATA
+	DEPARTMENT TABLE 
 */
 delete dbo.Students
 delete dbo.Departments 
@@ -127,9 +174,13 @@ select * from dbo.Departments
 go
 
 /*
-	STUDENT TABLE DATA
+	STUDENT TABLE 
 */
+delete dbo.Students;
+go
+
 delete dbo.Students
+where idDept > 5;
 go
 
 if (OBJECT_ID('sp_GetStudentData') is not null)
@@ -190,12 +241,12 @@ go
 create procedure sp_GetStudentSummary
 	@stID int
 as
-	select *
-	from Students as s, Departments as d, TheSchool as t
+	select * 
+	from Students as s, Departments as d, TheSchool as t 
 	where s.idStudent = @stID and s.idDept = d.idDept
 go
 
-execute sp_GetStudentSummary 6
+execute sp_GetStudentSummary;
 go
 
 /*
