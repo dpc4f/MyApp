@@ -50,7 +50,7 @@ begin
 
 				-- add to the table
 				insert into dbo.Subjects
-				values (@idSubject, 'Subject Name', @nCredit, @idDept, @idStdtitle)
+				values (@idSubject, 'Subject Name', @nCredit, @idDept, @idStdtitle, @nSubj)
 
 				-- update counters				
 				set @nSubj = @nSubj + 1
@@ -67,7 +67,7 @@ drop procedure dbo.sp_GenerateSubjectData;
 exec dbo.sp_GenerateSubjectData;
 
 
-
+delete Subjects;
 
 select * from Subjects;
 
@@ -88,3 +88,8 @@ select dbo.fn_ZeroPad(13, 3)
 delete Subjects;
 
 exec sp_rename 'Subjects.IdSubjects', 'IdSubject', 'COLUMN';
+
+alter table dbo.Subjects
+add SubjectNumber int null
+
+

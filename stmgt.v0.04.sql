@@ -37,17 +37,11 @@ Classes
 	
 EnRollments
 
-	ENRO.<SubjectNumber>.<StudentNumber>.<TaughtYear>.<TaughtSemester>
-	ENRO.0045.100044.15.01
+	ENRO.<SubjectNumber>.<StudentNumber>.<TaughtYear>
+	ENRO.0045.100044.15
 
 	count(ENRO.<DeptNumber>.<SubjectNumber>.<TaughtYear>.<TaughtSemester>.*) <= 100
 		
-Semesters
-	There are 3 semesters per year.
-	01: From Sep 01 to Dec 31, 1st semester.
-	02: From Jan 01 to April 30, 2nd semester.
-	03: From May 01 to August 31, 3rd semester.
-
 Registration
 	REGS.<DeptNumber>.<SubjectNumber>.<StudentNumber>
 	REGS.07.0045.000183

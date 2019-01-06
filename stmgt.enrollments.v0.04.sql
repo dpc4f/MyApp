@@ -11,7 +11,7 @@
 		- now it is the senior year for students that have entrance year 15,
 			then students with entrance year 15 are first ones who joined subjects having studentYear 1 
 */
-create sp_GenerateEnrollData
+create procedure sp_GenerateEnrollData
 	as
 begin
 	-- students with entrance year 15, subjects for freshman ones
@@ -22,59 +22,116 @@ begin
 			calculate the subject numbers from student year & dept number
 			select random from 3..7 subject numbers
 	*/
-	declare @studNumber int
-	set @studNumber = 1
+	declare @nStudNumber int
+	set @nStudNumber = 1
 
 	-- get deptId of the student
-	declare @idDept varchar(50)
+	declare @idDept nchar(10)
 	set @idDept = (select Students.IdDept
 					from Students
-					where @studNumber = StudNumber)
+					where @nStudNumber = StudNumber)
 	
-	declare @subjectTbl table (IdSubject varchar(50))
+	-- get the subjects of the freshman ones
+	declare @subjectTbl table (nRow int, IdSubject nchar(20), SubjectNumber int)
 	insert into @subjectTbl
-	select tbl.IdSubject
-	from dbo.fn_Select_AtLeast03_SubjectIds(@idDept, 'STI.1') as tbl -- get the subjects of the freshman ones
-	order by tbl.IdSubject
+	select *
+	from dbo.fn_Select_AtLeast03_SubjectIds(@idDept, 'STI.1')
 
 	-- for each subject, make an enrollment of the student
-	declare @nSbjNumber as int
-	set @nSbjNumber = (select count(*) from @subjectTbl)
+	declare @nSbjTotal as int
+	set @nSbjTotal = (select count(*) from @subjectTbl)
 	declare @nCount as int
 	set @nCount = 1
-	while (@nCount <= @nSbjNumber)
+	declare @nSbjNumber as int
+	declare @idSubject as nchar(20)
+
+	while (@nCount <= @nSbjTotal)
 	begin
 		-- generate a random grade point
 		declare @nGradePoint int
 		set @nGradePoint = dbo.fn_Random(6) -- [0..5]
+		print @nGradePoint
+
+		-- get the student's ID
+		declare @idStudent as nchar(20)
+		set @idStudent = (select IdStudent 
+							from Students
+							where StudNumber = @nStudNumber)
+		print @idStudent
+
 
 		-- taught year is the entrance year
+		declare @entranceYearStr as varchar(50)
+		declare @nEntrYear int
+		set @entranceYearStr = (SELECT tempo FROM (
+									SELECT ROW_NUMBER () OVER (ORDER BY nRow) AS RowNum, tempo
+									FROM dbo.fn_splitstring(@idStudent) 
+								) sub
+								WHERE RowNum = 2)
+		set @nEntrYear = cast(@entranceYearStr as int)
+		print @nEntrYear
 
-		-- taught semester : TO BE CONTINUED, just filled the value 01
+		-- taught semester : TO BE CONTINUED, just filled the value 1
+
+		-- get the subject id, subject number
+		set @nSbjNumber= (Select SubjectNumber
+							FROM (
+									SELECT ROW_NUMBER () OVER (ORDER BY nRow) AS RowNum, *
+									FROM  @subjectTbl
+								) sub
+							WHERE RowNum = @nCount)
+		print @nSbjNumber
+
+		set @idSubject = (Select IdSubject
+							FROM (
+									SELECT ROW_NUMBER () OVER (ORDER BY nRow) AS RowNum, *
+									FROM  @subjectTbl
+								) sub
+							WHERE RowNum = @nCount)
+		print @idSubject
+		
+
+		-- create enrollment id
+		declare @idEnrollment as varchar(50)
+		set @idEnrollment = 'ENRO.' + dbo.fn_ZeroPad(@nSbjNumber, 4) + '.' 
+									+ dbo.fn_ZeroPad(@nStudNumber, 6) + '.' + cast(@nEntrYear as varchar(50)) + '.1' 
+		print @idEnrollment
+
+		-- insert into enrollments table
+		insert into dbo.Enrollments
+		values (@idEnrollment, @idSubject, @idStudent, @nEntrYear, 1, @nGradePoint)
+	
+		-- increase the counter
+		set @nCount = @nCount + 1
 	end
 end
+
+
+exec dbo.sp_GenerateEnrollData;
+select * from dbo.Enrollments;
+
+drop procedure dbo.sp_GenerateEnrollData
 
 
 -- calculate subject numbers and return as a table
 -- input IdDept, IdStudTitle
 
 create function fn_GetListSubjectId (@idDept as varchar(50), @idStudTitle as varchar(50))
-	returns @rtnTable table(
-		IdSubject varchar(50) not null
-	)
+	returns @rtnTable table (IdSubject varchar(50) not null, SubjectNumber int)
   as
 begin
-	declare @tmpTable table (idSubject varchar(50))
+	declare @tmpTable table (idSubject varchar(50), SubjectNumber int)
 	
 	insert into @tmpTable
-	select IdSubject
+	select IdSubject, SubjectNumber
 	from Subjects 
 	where IdDept = @idDept and IdStdTitle = @idStudTitle
 
 	-- this select return data
 	insert into @rtnTable
-	select IdSubject 
+	select IdSubject, SubjectNumber 
 	from @tmpTable
+	order by SubjectNumber
 	return
 end
 
@@ -83,16 +140,15 @@ drop function dbo.fn_GetListSubjectId
 select *
 from dbo.fn_GetListSubjectId('DEPT.02', 'STI.1')
 
+select * from Subjects
 
 -- you have to sort the values after get the result table
-create function fn_Select_AtLeast03_SubjectIds (@idDept as varchar(50), @idStudTitle as varchar(50))
-	returns @rtnTable table(
-		IdSubject varchar(50) not null
-	)
+create function fn_Select_AtLeast03_SubjectIds (@idDept as nchar(10), @idStudTitle as nchar(10))
+	returns @rtnTable table( nRow int, IdSubject nchar(20) not null, SubjectNumber int )
   as
 begin
-	declare @tmpTable table (IdSubject varchar(50) not null)
-	declare @sbjIdTable table (IdSubject varchar(50) not null)
+	declare @tmpTable table (nRow int, IdSubject varchar(50) not null, SubjectNumber int)
+	declare @sbjIdTable table (IdSubject varchar(50) not null, SubjectNumber int)
 	declare @nRandom int
 
 	insert into @sbjIdTable
@@ -109,6 +165,7 @@ begin
 	declare @nCnt int
 	declare @nExist int
 	declare @idTmp varchar(50)
+	declare @sbjNumbTmp int
 
 	set @nCnt = 1
 	while @nCnt <= @nSlot
@@ -119,17 +176,17 @@ begin
 		begin
 			set @nID = dbo.fn_Random(7) -- [0..6]
 			set @nID = @nID + 1 -- [1..7]
-			set @idTmp = (SELECT IdSubject
+			SELECT @idTmp = IdSubject, @sbjNumbTmp = SubjectNumber 
 							FROM (
 								SELECT ROW_NUMBER () OVER (ORDER BY IdSubject) AS RowNum, *
 								FROM @sbjIdTable
 							) sub
-							WHERE RowNum = @nID)
+							WHERE RowNum = @nID
 			set @nExist = ((select count(*) from @tmpTable where IdSubject = @idTmp))
 		end
 
 		insert into @tmpTable
-		values (@idTmp)
+		values (@nCnt, @idTmp, @sbjNumbTmp)
 		-- increase the counter
 		set @nCnt = @nCnt + 1
 	end
@@ -137,7 +194,7 @@ begin
 	-- this select return data
 	
 	insert into @rtnTable
-	select IdSubject from @tmpTable as tbl
+	select * from @tmpTable as tbl
 	order by tbl.IdSubject
 	return
 end
@@ -145,9 +202,6 @@ end
 
 select *
 from dbo.fn_Select_AtLeast03_SubjectIds('DEPT.02', 'STI.1')
-order by IdSubject
-
-select *
 
 drop function dbo.fn_Select_AtLeast03_SubjectIds;
 
