@@ -6,11 +6,15 @@ Departments
 	
 Students 
 	STUD.<EntranceYear>.<DeptNumber>.<StudentNumber>
-	STUD.06.04.000183
+	STUD.15.04.100971
 	
-	Students have to earn at least 53 credits to graduate.
+	Students have to earn at least 55 credits to graduate.
 	
 Subjects
+	SUBJ.<StudentYear>.<DeptNumber>.<SubjectNumber>
+	SUBJ.1.07.0045
+	SUBJ.2.07.0166
+	
 	With a subject that two or more departments provide to students, 
 		let consider they are 2 different subjects.
 	Each department, each student year, there are 7 subjects.
@@ -18,28 +22,29 @@ Subjects
 	Therefore, at least 14 credits per year. At least 56 credits per course.
 	There are 17 departments x 7 subjects/year x 4 years = 476 subjects in total.
 
-	SUBJ.<StudentYear>.<DeptNumber>.<SubjectNumber>
-	SUBJ.1.07.0045
-	SUBJ.2.07.0166
-	
 	
 	
 Classes
 	In a year, there are two classes of each subject provided to students.
 	CLSS.<StudentYear>.<DeptNumber>.<SubjectNumber>.<CurrentYear>.<SemesterNumber>.A-B
-	CLSS.01.07.0045.19.03.A
-	CLSS.01.07.0045.19.03.B
+	CLSS.01.07.0045.19.02.A
+	CLSS.01.07.0045.19.02.B
 	
 	Registration:
 		If a subject has number of registered students of the same StudentYear or greater, greater than 20, the class is organized in the next semester.
 		First come first serve.
 		The maximum students per class is 50. If registered number is bigger than 50, divide into 2 classes.
 	
-R
+EnRollments
+
+	ENRO.<SubjectNumber>.<StudentNumber>.<TaughtYear>.<TaughtSemester>
+	ENRO.0045.100044.15.01
+
+	count(ENRO.<DeptNumber>.<SubjectNumber>.<TaughtYear>.<TaughtSemester>.*) <= 100
 		
 Semesters
 	There are 3 semesters per year.
-	01: From Sept 01 to Dec 31, 1st semester.
+	01: From Sep 01 to Dec 31, 1st semester.
 	02: From Jan 01 to April 30, 2nd semester.
 	03: From May 01 to August 31, 3rd semester.
 

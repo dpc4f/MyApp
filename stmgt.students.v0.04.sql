@@ -35,8 +35,6 @@ begin
 	while (@nYear <= @MAX_YEAR)
 	begin
 		set @nDept = 1
-		print @nDept
-
 		while (@nDept <= @MAX_DEPT)
 		begin
 			set @nStudYear = 1
@@ -107,3 +105,28 @@ select * from Students;
 declare @CURRENT_YEAR int
 set @CURRENT_YEAR = YEAR(GETDATE()) % 100
 print @CURRENT_YEAR
+
+
+-- to be continued
+create procedure sp_UpdateStudentTitle
+  as
+begin
+	declare @nStudNumber int
+	set @nStudNumber = 1
+
+	declare @MAX_STUDENT_NUMBER int
+	set @MAX_STUDENT_NUMBER = (select max(Students.StudNumber) from Students)
+
+	declare @idStudent varchar(50)
+	while (@nStudNumber <= @MAX_STUDENT_NUMBER)
+	begin
+		set @idStudent = (select idStudent from Students where @nStudNumber = StudNumber)
+
+		-- split the string to get entrance year
+	end
+
+
+
+
+
+end

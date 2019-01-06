@@ -86,3 +86,5 @@ print @idDept
 select dbo.fn_ZeroPad(13, 3)
 
 delete Subjects;
+
+exec sp_rename 'Subjects.IdSubjects', 'IdSubject', 'COLUMN';
