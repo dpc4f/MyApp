@@ -20,7 +20,7 @@ Subjects
 
 	SUBJ.<StudentYear>.<DeptNumber>.<SubjectNumber>
 	SUBJ.1.07.0045
-	SUBJ.2.07.00166
+	SUBJ.2.07.0166
 	
 	
 	

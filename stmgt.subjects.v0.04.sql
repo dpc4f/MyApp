@@ -1,3 +1,4 @@
+-- will improve if there's time
 create procedure sp_GenerateSubjectData  as
 begin
 	declare @MAX_YEAR int
@@ -28,7 +29,7 @@ begin
 			while (@nSubjYear <= @MAX_SUBJ_PER_YEAR)
 			begin
 				set @idSubject = 'SUBJ.' + cast(@nYear as varchar(50)) + '.' + 
-									dbo.fn_ZeroPad(@nDept, 2) + '.' + dbo.fn_ZeroPad(@nSubj, 5)
+									dbo.fn_ZeroPad(@nDept, 2) + '.' + dbo.fn_ZeroPad(@nSubj, 4)
 				print @idSubject
 				
 				-- generate the credits
