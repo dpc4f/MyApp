@@ -89,6 +89,21 @@ drop function fn_splitstring
 
 SELECT * FROM dbo.fn_splitstring('STUD.15.01.100002')
 
+use stmgtdb;
+
+create function fn_getCurrentYear()
+	returns int
+  as
+begin
+	--declare @curYear nchar(2)
+	--set @curYear = dbo.fn_ZeroPad((YEAR(GetDAtE()) % 100), 2)
+
+	return YEAR(GetDAtE()) % 100
+end
+
+select dbo.fn_getCurrentYear()
+drop function dbo.fn_getCurrentYear;
+
 declare @entranceYearStr as varchar(50)
 set @entranceYearStr = ()
 select @entranceYearStr
