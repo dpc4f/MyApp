@@ -107,7 +107,6 @@ set @CURRENT_YEAR = YEAR(GETDATE()) % 100
 print @CURRENT_YEAR
 
 
--- to be continued
 create procedure sp_UpdateStudentTitle
   as
 begin
@@ -124,9 +123,26 @@ begin
 
 		-- split the string to get entrance year
 	end
-
-
-
-
-
 end
+
+
+
+create procedure sp_GetStudentSummary
+	@idStudent nchar(20)
+  as
+begin
+	select * 
+	from Students as s, Departments as d, Genders as g, Enrollments as e
+	where s.IdStudent = @idStudent and s.IdDept = d.IdDept and s.IdGender = g.IdGender and s.IdStudent = e.IdStudent
+end
+
+exec dbo.sp_GetStudentSummary 'STUD.15.01.100001   '
+
+drop procedure dbo.sp_GetStudentSummary
+
+select * 
+from Students as s, Departments as d, Genders as g, Enrollments as e
+where s.IdStudent = 'STUD.15.01.100001' and s.IdDept = d.IdDept and s.IdGender = g.IdGender and s.IdStudent = e.IdStudent
+
+
+go

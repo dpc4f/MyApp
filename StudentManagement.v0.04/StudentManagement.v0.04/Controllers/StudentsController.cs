@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using CrystalDecisions.CrystalReports.Engine;
 using StudentManagement.v0._04.Models;
 
 namespace StudentManagement.v0._04.Controllers
@@ -60,6 +61,7 @@ namespace StudentManagement.v0._04.Controllers
             }
 
             ViewBag.IdDept = new SelectList(db.Departments, "IdDept", "DeptName", student.IdDept);
+            // ViewBag.DeptName = new SelectList(db.Departments, "DeptName", "DeptName", student.DeptName);
             ViewBag.IdGender = new SelectList(db.Genders, "IdGender", "Gender1", student.IdGender);
             ViewBag.IdStudTitle = new SelectList(db.StdTitles, "IdTitle", "StudentTitle", student.IdStudTitle);
             return View(student);
@@ -78,6 +80,7 @@ namespace StudentManagement.v0._04.Controllers
                 return HttpNotFound();
             }
             ViewBag.IdDept = new SelectList(db.Departments, "IdDept", "DeptName", student.IdDept);
+            // ViewBag.DeptName = new SelectList(db.Departments, "DeptName", "DeptName", student.DeptName);
             ViewBag.IdGender = new SelectList(db.Genders, "IdGender", "Gender1", student.IdGender);
             ViewBag.IdStudTitle = new SelectList(db.StdTitles, "IdTitle", "StudentTitle", student.IdStudTitle);
             return View(student);
@@ -97,6 +100,7 @@ namespace StudentManagement.v0._04.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.IdDept = new SelectList(db.Departments, "IdDept", "DeptName", student.IdDept);
+            // ViewBag.DeptName = new SelectList(db.Departments, "DeptName", "DeptName", student.DeptName);
             ViewBag.IdGender = new SelectList(db.Genders, "IdGender", "Gender1", student.IdGender);
             ViewBag.IdStudTitle = new SelectList(db.StdTitles, "IdTitle", "StudentTitle", student.IdStudTitle);
             return View(student);
@@ -126,6 +130,18 @@ namespace StudentManagement.v0._04.Controllers
             db.Students.Remove(student);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        // GET: Students/ViewReport
+        public ActionResult ViewReport(string idStudent)
+        {
+            ReportDocument reportDocument = new ReportDocument();
+            reportDocument.Load(Server.MapPath("~/Reports/StudentSumAll.rpt"));
+            reportDocument.SetDatabaseLogon("sa", "1234", "DESKTOP-3J745NI\\PROCASQLSERVER", "stmgmt", false);
+            reportDocument.SetParameterValue("stID", idStudent);
+            var s = reportDocument.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+
+            return File(s, "application/pdf");
         }
 
         protected override void Dispose(bool disposing)

@@ -32,15 +32,16 @@
        columns.Add(c => c.IdStudent).Titled("Student ID");
        columns.Add(c => c.FirstN).Titled("First Name").Filterable(true);
        columns.Add(c => c.LastN).Titled("Last Name").Filterable(true);
-       columns.Add(c => c.IdDept).Titled("Dept ID").Filterable(true);
-       columns.Add(c => c.IdGender).Titled("Gender ID").Filterable(true);
+       columns.Add(c => c.Department.DeptName).Titled("Department Name").Filterable(true);
+       columns.Add(c => c.Gender.Gender1).Titled("Gender").Filterable(true);
+       columns.Add(c => c.StdTitle.StudentTitle).Titled("Student Title").Filterable(true);
 
        columns.Add().
             Encoded(false).
             Sanitized(false).
             SetWidth(30).
             RenderValueAs(c => Html.ActionLink("Summary", "ViewReport", new { id = c.IdStudent }, new { @class = "btn btn-info" }));
-   }).WithPaging(15).Sortable(true)
+   }).WithPaging(10).Sortable(true)
     </div>
 
 </body>

@@ -77,7 +77,6 @@ D:\repos_tmp\StudentManagement.v0.04\StudentManagement.v0.04\bin\Antlr3.Runtime.
 D:\repos_tmp\StudentManagement.v0.04\StudentManagement.v0.04\bin\System.Diagnostics.DiagnosticSource.xml
 D:\repos_tmp\StudentManagement.v0.04\StudentManagement.v0.04\bin\Microsoft.AspNet.TelemetryCorrelation.xml
 D:\repos_tmp\StudentManagement.v0.04\StudentManagement.v0.04\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\repos_tmp\StudentManagement.v0.04\StudentManagement.v0.04\obj\Debug\StudentManagement.v0.04.csprojAssemblyReference.cache
 D:\repos_tmp\StudentManagement.v0.04\StudentManagement.v0.04\obj\Debug\StudentManagement.v0.04.csproj.CoreCompileInputs.cache
 D:\repos_tmp\StudentManagement.v0.04\StudentManagement.v0.04\obj\Debug\StudentManagement.v0.04.csproj.CopyComplete
 D:\repos_tmp\StudentManagement.v0.04\StudentManagement.v0.04\obj\Debug\StudentManagement.v0.04.dll
