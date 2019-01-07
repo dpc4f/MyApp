@@ -1,0 +1,58 @@
+﻿@model StudentManagement.v0._04.Models.Enrollment
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Enrollment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TaughtYear)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TaughtYear)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TaughtSemester)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TaughtSemester)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GradePoint)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GradePoint)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Student.FirstN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Student.FirstN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Subject.SubjectName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Subject.SubjectName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdEnrollment }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
