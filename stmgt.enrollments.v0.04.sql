@@ -22,12 +22,11 @@ begin
 			calculate the subject numbers from student year & dept number
 			select random from 3..7 subject numbers
 	*/
-	declare @nStudNumber int
-	set @nStudNumber = 1
-
 	declare @MAX_STUDENT_NUMBER int
 	set @MAX_STUDENT_NUMBER = (select max(StudNumber)from dbo.Students)
 
+	declare @nStudNumber int
+	set @nStudNumber = 1
 	while (@nStudNumber <= @MAX_STUDENT_NUMBER)
 	begin
 		-- get deptId of the student
@@ -45,7 +44,7 @@ begin
 		set @idStudent = (select IdStudent 
 							from Students
 							where StudNumber = @nStudNumber)
-		print @idStudent
+		-- print @idStudent
 
 		-- get the entrance year of the student
 		declare @entranceYearStr as varchar(50)
@@ -56,17 +55,16 @@ begin
 								) sub
 								WHERE RowNum = 2)
 		set @nEntrYear = cast(@entranceYearStr as int)
-		print @nEntrYear
+		-- print @nEntrYear
 
 		declare @nCountStudYear int
 		set @nCountStudYear = 1
-	
 		while (@nCountStudYear <= @nCurYear - @nEntrYear)
 		begin
 			-- get the student title id
 			declare @studTitleId as nchar(10)
 			set @studTitleId = dbo.fn_GetStudentTitleId (@nCountStudYear) 
-			print ('Student title id:' + @studTitleId)
+			-- print ('Student title id:' + @studTitleId)
 
 			-- get the subjects of the students with @studTitleId
 			declare @subjectTbl table (nRow int, IdSubject nchar(20), SubjectNumber int)
@@ -78,7 +76,7 @@ begin
 			-- for each subject, make an enrollment of the student
 			declare @nSbjTotal as int
 			set @nSbjTotal = (select count(*) from @subjectTbl)
-			print 'Total subject count: ' + cast(@nSbjTotal as nvarchar(50))
+			-- print 'Total subject count: ' + cast(@nSbjTotal as nvarchar(50))
 
 			declare @nCount as int
 			set @nCount = 1
@@ -90,9 +88,11 @@ begin
 				-- generate a random grade point
 				declare @nGradePoint int
 				set @nGradePoint = dbo.fn_Random(6) -- [0..5]
-				print 'Grade point: ' + cast(@nGradePoint as nvarchar(50))
+				-- print 'Grade point: ' + cast(@nGradePoint as nvarchar(50))
 
 				-- taught year is the entrance year + @nCountStudYear - 1
+				declare @nTaughtYear int
+				set @nTaughtYear = @nEntrYear + @nCountStudYear - 1
 				-- taught semester : TO BE CONTINUED, just filled the value 1
 
 				-- get the subject number
@@ -102,7 +102,7 @@ begin
 											FROM  @subjectTbl
 										) sub
 									WHERE RowNum = @nCount)
-				print 'Subject number: ' + cast(@nSbjNumber as nvarchar(50))
+				-- print 'Subject number: ' + cast(@nSbjNumber as nvarchar(50))
 
 				-- get the subject id
 				set @idSubject = (Select IdSubject
@@ -111,19 +111,19 @@ begin
 											FROM  @subjectTbl
 										) sub
 									WHERE RowNum = @nCount)
-				print 'Subject id: ' + @idSubject
+				-- print 'Subject id: ' + @idSubject
 		
 
 				-- create enrollment id
 				-- ENRO.<SubjectNumber>.<StudentNumber>.<TaughtYear>
 				declare @idEnrollment as varchar(50)
 				set @idEnrollment = 'ENRO.' + dbo.fn_ZeroPad(@nSbjNumber, 4) + '.' 
-											+ dbo.fn_ZeroPad(@nStudNumber, 6) + '.' + cast(@nEntrYear as varchar(50))
-				print @idEnrollment
+											+ dbo.fn_ZeroPad(@nStudNumber, 6) + '.' + cast(@nTaughtYear as nvarchar(50))
+				-- print @idEnrollment
 
 				-- insert into enrollments table
 				insert into dbo.Enrollments
-				values (@idEnrollment, @idSubject, @idStudent, @nEntrYear, 1, @nGradePoint)
+				values (@idEnrollment, @idSubject, @idStudent, @nTaughtYear, 1, @nGradePoint)
 	
 				-- increase the counter
 				set @nCount = @nCount + 1
