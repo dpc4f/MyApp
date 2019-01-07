@@ -123,3 +123,4 @@ WHERE RowNum = 2
 		dbo.fn_splitstring('STUD.15.01.100002') 
 
 
+select max(StudNumber)from dbo.Students;

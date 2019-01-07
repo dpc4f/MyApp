@@ -92,7 +92,7 @@ begin
 				set @nGradePoint = dbo.fn_Random(6) -- [0..5]
 				print 'Grade point: ' + cast(@nGradePoint as nvarchar(50))
 
-				-- taught year is the entrance year
+				-- taught year is the entrance year + @nCountStudYear - 1
 				-- taught semester : TO BE CONTINUED, just filled the value 1
 
 				-- get the subject number
