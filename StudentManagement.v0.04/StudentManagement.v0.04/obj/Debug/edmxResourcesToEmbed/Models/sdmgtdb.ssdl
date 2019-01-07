@@ -1,0 +1,292 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="stmgtdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Classes">
+    <Key>
+      <PropertyRef Name="IdClass" />
+    </Key>
+    <Property Name="IdClass" Type="nchar" MaxLength="30" Nullable="false" />
+    <Property Name="IdStdTitle" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="IdDept" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="IdSubject" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="TaughtYear" Type="int" Nullable="false" />
+    <Property Name="Semester" Type="int" Nullable="false" />
+    <Property Name="ClsLetter" Type="nchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Departments">
+    <Key>
+      <PropertyRef Name="IdDept" />
+    </Key>
+    <Property Name="IdDept" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="DeptName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DeptNumb" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Enrollments">
+    <Key>
+      <PropertyRef Name="IdEnrollment" />
+    </Key>
+    <Property Name="IdEnrollment" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="IdSubject" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="IdStudent" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="TaughtYear" Type="int" Nullable="false" />
+    <Property Name="TaughtSemester" Type="int" Nullable="false" />
+    <Property Name="GradePoint" Type="real" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Genders">
+    <Key>
+      <PropertyRef Name="IdGender" />
+    </Key>
+    <Property Name="IdGender" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Gender" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Registrations">
+    <Key>
+      <PropertyRef Name="IdRegistration" />
+    </Key>
+    <Property Name="IdRegistration" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="IdDept" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="IdSubject" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="IdStudent" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="RegYear" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StdTitles">
+    <Key>
+      <PropertyRef Name="IdTitle" />
+    </Key>
+    <Property Name="IdTitle" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="StudentTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="YearNumb" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Students">
+    <Key>
+      <PropertyRef Name="IdStudent" />
+    </Key>
+    <Property Name="IdStudent" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="FirstN" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastN" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IdGender" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="IdDept" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="IdStudTitle" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="StudNumber" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Subjects">
+    <Key>
+      <PropertyRef Name="IdSubject" />
+    </Key>
+    <Property Name="IdSubject" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="SubjectName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Credits" Type="int" Nullable="false" />
+    <Property Name="IdDept" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="IdStdTitle" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="SubjectNumber" Type="int" />
+  </EntityType>
+  <EntityType Name="TheSchool">
+    <Key>
+      <PropertyRef Name="SchoolName" />
+    </Key>
+    <Property Name="SchoolName" Type="nchar" MaxLength="250" Nullable="false" />
+    <Property Name="FoundationDay" Type="date" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Classes_Departments">
+    <End Role="Departments" Type="Self.Departments" Multiplicity="1" />
+    <End Role="Classes" Type="Self.Classes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Departments">
+        <PropertyRef Name="IdDept" />
+      </Principal>
+      <Dependent Role="Classes">
+        <PropertyRef Name="IdDept" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Classes_StdTitles">
+    <End Role="StdTitles" Type="Self.StdTitles" Multiplicity="1" />
+    <End Role="Classes" Type="Self.Classes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StdTitles">
+        <PropertyRef Name="IdTitle" />
+      </Principal>
+      <Dependent Role="Classes">
+        <PropertyRef Name="IdStdTitle" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Classes_Subjects">
+    <End Role="Subjects" Type="Self.Subjects" Multiplicity="1" />
+    <End Role="Classes" Type="Self.Classes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subjects">
+        <PropertyRef Name="IdSubject" />
+      </Principal>
+      <Dependent Role="Classes">
+        <PropertyRef Name="IdSubject" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Enrollments_Students">
+    <End Role="Students" Type="Self.Students" Multiplicity="1" />
+    <End Role="Enrollments" Type="Self.Enrollments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="IdStudent" />
+      </Principal>
+      <Dependent Role="Enrollments">
+        <PropertyRef Name="IdStudent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Enrollments_Subjects">
+    <End Role="Subjects" Type="Self.Subjects" Multiplicity="1" />
+    <End Role="Enrollments" Type="Self.Enrollments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subjects">
+        <PropertyRef Name="IdSubject" />
+      </Principal>
+      <Dependent Role="Enrollments">
+        <PropertyRef Name="IdSubject" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Registrations_Students">
+    <End Role="Students" Type="Self.Students" Multiplicity="1" />
+    <End Role="Registrations" Type="Self.Registrations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="IdStudent" />
+      </Principal>
+      <Dependent Role="Registrations">
+        <PropertyRef Name="IdStudent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Registrations_Subjects">
+    <End Role="Subjects" Type="Self.Subjects" Multiplicity="1" />
+    <End Role="Registrations" Type="Self.Registrations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subjects">
+        <PropertyRef Name="IdSubject" />
+      </Principal>
+      <Dependent Role="Registrations">
+        <PropertyRef Name="IdSubject" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Students_Departments">
+    <End Role="Departments" Type="Self.Departments" Multiplicity="1" />
+    <End Role="Students" Type="Self.Students" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Departments">
+        <PropertyRef Name="IdDept" />
+      </Principal>
+      <Dependent Role="Students">
+        <PropertyRef Name="IdDept" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Students_Genders">
+    <End Role="Genders" Type="Self.Genders" Multiplicity="1" />
+    <End Role="Students" Type="Self.Students" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Genders">
+        <PropertyRef Name="IdGender" />
+      </Principal>
+      <Dependent Role="Students">
+        <PropertyRef Name="IdGender" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Students_StdTitles">
+    <End Role="StdTitles" Type="Self.StdTitles" Multiplicity="1" />
+    <End Role="Students" Type="Self.Students" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StdTitles">
+        <PropertyRef Name="IdTitle" />
+      </Principal>
+      <Dependent Role="Students">
+        <PropertyRef Name="IdStudTitle" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Subjects_Departments">
+    <End Role="Departments" Type="Self.Departments" Multiplicity="1" />
+    <End Role="Subjects" Type="Self.Subjects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Departments">
+        <PropertyRef Name="IdDept" />
+      </Principal>
+      <Dependent Role="Subjects">
+        <PropertyRef Name="IdDept" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Subjects_StdTitles">
+    <End Role="StdTitles" Type="Self.StdTitles" Multiplicity="1" />
+    <End Role="Subjects" Type="Self.Subjects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StdTitles">
+        <PropertyRef Name="IdTitle" />
+      </Principal>
+      <Dependent Role="Subjects">
+        <PropertyRef Name="IdStdTitle" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="stmgtdbModelStoreContainer">
+    <EntitySet Name="Classes" EntityType="Self.Classes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Enrollments" EntityType="Self.Enrollments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Genders" EntityType="Self.Genders" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Registrations" EntityType="Self.Registrations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StdTitles" EntityType="Self.StdTitles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TheSchool" EntityType="Self.TheSchool" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Classes_Departments" Association="Self.FK_Classes_Departments">
+      <End Role="Departments" EntitySet="Departments" />
+      <End Role="Classes" EntitySet="Classes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Classes_StdTitles" Association="Self.FK_Classes_StdTitles">
+      <End Role="StdTitles" EntitySet="StdTitles" />
+      <End Role="Classes" EntitySet="Classes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Classes_Subjects" Association="Self.FK_Classes_Subjects">
+      <End Role="Subjects" EntitySet="Subjects" />
+      <End Role="Classes" EntitySet="Classes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Enrollments_Students" Association="Self.FK_Enrollments_Students">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="Enrollments" EntitySet="Enrollments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Enrollments_Subjects" Association="Self.FK_Enrollments_Subjects">
+      <End Role="Subjects" EntitySet="Subjects" />
+      <End Role="Enrollments" EntitySet="Enrollments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Registrations_Students" Association="Self.FK_Registrations_Students">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="Registrations" EntitySet="Registrations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Registrations_Subjects" Association="Self.FK_Registrations_Subjects">
+      <End Role="Subjects" EntitySet="Subjects" />
+      <End Role="Registrations" EntitySet="Registrations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Students_Departments" Association="Self.FK_Students_Departments">
+      <End Role="Departments" EntitySet="Departments" />
+      <End Role="Students" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Students_Genders" Association="Self.FK_Students_Genders">
+      <End Role="Genders" EntitySet="Genders" />
+      <End Role="Students" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Students_StdTitles" Association="Self.FK_Students_StdTitles">
+      <End Role="StdTitles" EntitySet="StdTitles" />
+      <End Role="Students" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Subjects_Departments" Association="Self.FK_Subjects_Departments">
+      <End Role="Departments" EntitySet="Departments" />
+      <End Role="Subjects" EntitySet="Subjects" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Subjects_StdTitles" Association="Self.FK_Subjects_StdTitles">
+      <End Role="StdTitles" EntitySet="StdTitles" />
+      <End Role="Subjects" EntitySet="Subjects" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

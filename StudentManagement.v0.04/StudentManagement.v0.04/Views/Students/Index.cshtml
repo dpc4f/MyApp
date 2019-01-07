@@ -1,0 +1,50 @@
+﻿@model IEnumerable<StudentManagement.v0._04.Models.Student>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@using GridMvc.Html
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <link href="@Url.Content("~/Content/Gridmvc.css")" rel="stylesheet" />
+        <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" />
+        <script src="@Url.Content("~/Scripts/jquery-1.9.1.min.js")"></script>
+        <script src="@Url.Content("~/Scripts/gridmvc.min.js")"></script>
+        <title>Index</title>
+    </head>
+</head>
+<body>
+    <h1>Grid.MVC</h1>
+    <hr />
+    <div style="width:500px;">
+        @Html.Grid(Model).Columns(columns =>
+   {
+       columns.Add(c => c.IdStudent).Titled("Student ID");
+       columns.Add(c => c.FirstN).Titled("First Name").Filterable(true);
+       columns.Add(c => c.LastN).Titled("Last Name").Filterable(true);
+       columns.Add(c => c.IdDept).Titled("Dept ID").Filterable(true);
+       columns.Add(c => c.IdGender).Titled("Gender ID").Filterable(true);
+
+       columns.Add().
+            Encoded(false).
+            Sanitized(false).
+            SetWidth(30).
+            RenderValueAs(c => Html.ActionLink("Summary", "ViewReport", new { id = c.IdStudent }, new { @class = "btn btn-info" }));
+   }).WithPaging(15).Sortable(true)
+    </div>
+
+</body>
+</html>
+
+
+

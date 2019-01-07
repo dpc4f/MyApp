@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b254e04e132c46cc80a3d3eacf94f19f" Name="Diagram1">
+        <EntityTypeShape EntityType="stmgtdbModel.Class" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="stmgtdbModel.Department" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="stmgtdbModel.Enrollment" Width="1.5" PointX="8.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="stmgtdbModel.Gender" Width="1.5" PointX="3.75" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="stmgtdbModel.Registration" Width="1.5" PointX="11.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="stmgtdbModel.StdTitle" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="stmgtdbModel.Student" Width="1.5" PointX="6" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="stmgtdbModel.Subject" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="stmgtdbModel.TheSchool" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="stmgtdbModel.FK_Classes_Departments" ManuallyRouted="false" />
+        <AssociationConnector Association="stmgtdbModel.FK_Classes_StdTitles" ManuallyRouted="false" />
+        <AssociationConnector Association="stmgtdbModel.FK_Classes_Subjects" ManuallyRouted="false" />
+        <AssociationConnector Association="stmgtdbModel.FK_Students_Departments" ManuallyRouted="false" />
+        <AssociationConnector Association="stmgtdbModel.FK_Subjects_Departments" ManuallyRouted="false" />
+        <AssociationConnector Association="stmgtdbModel.FK_Enrollments_Students" ManuallyRouted="false" />
+        <AssociationConnector Association="stmgtdbModel.FK_Enrollments_Subjects" ManuallyRouted="false" />
+        <AssociationConnector Association="stmgtdbModel.FK_Students_Genders" ManuallyRouted="false" />
+        <AssociationConnector Association="stmgtdbModel.FK_Registrations_Students" ManuallyRouted="false" />
+        <AssociationConnector Association="stmgtdbModel.FK_Registrations_Subjects" ManuallyRouted="false" />
+        <AssociationConnector Association="stmgtdbModel.FK_Students_StdTitles" ManuallyRouted="false" />
+        <AssociationConnector Association="stmgtdbModel.FK_Subjects_StdTitles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
