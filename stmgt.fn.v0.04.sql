@@ -244,5 +244,38 @@ end
 go
 
 
+-- function to update student title that run on each beginning of a year
+create function fn_GetStudentTitleId_v2( @studyingYear int )
+	returns nchar(10)
+  as
+begin
+	return 'STI.' + cast(@studyingYear as varchar(1))
+end
 
+create procedure sp_UpdateStudentTitle
+  as
+begin
+	declare @MAX_STUDENT_NUMBER int
+	set @MAX_STUDENT_NUMBER = (select max(StudNumber) from Students)
 
+	declare @nStCount int
+	set @nStCount = 1
+
+	while (@nStCount <= @MAX_STUDENT_NUMBER)
+	begin
+		declare @idStudent nchar(20)
+		set @idStudent = (select IdStudent from dbo.Students where @nStCount = StudNumber)
+		 
+		update dbo.Students
+		set IdStudTitle = dbo.fn_GetStudentTitleId_v2( dbo.fn_calculateStudyingYears(dbo.Students.IdStudent) ) 
+		where @idStudent = Students.IdStudent
+	
+		-- increase the counter
+		set @nStCount = @nStCount + 1
+	end
+end
+
+select top(100) * 
+from Students
+
+exec dbo.sp_UpdateStudentTitle
