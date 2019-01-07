@@ -30,11 +30,6 @@ Classes
 	CLSS.01.07.0045.19.02.A
 	CLSS.01.07.0045.19.02.B
 	
-	Registration:
-		If a subject has number of registered students of the same StudentYear or greater, greater than 20, the class is organized in the next semester.
-		First come first serve.
-		The maximum students per class is 50. If registered number is bigger than 50, divide into 2 classes.
-	
 EnRollments
 
 	ENRO.<SubjectNumber>.<StudentNumber>.<TaughtYear>
@@ -46,9 +41,12 @@ Registration
 	REGS.<DeptNumber>.<SubjectNumber>.<StudentNumber>
 	REGS.07.0045.000183
 
-	Time table is created at the end of each semester. It is for the next semester. 
+	Time table is created at the end of each year. It is for the next year. 
+	at the current time, consider that each year has one semester.
 	Do querying in the Enrollment table and retrieve all subjects that have registration bigger than 20.
 	In case the registration number is lower than 20, drop the class and delete all the class' registration.
+	The maximum students per class is 50. If registered number is bigger than 50, divide into 2 classes.
+	First come first serve. If the registration number is bigger than 100, exlude ones that come later.
 
 Genders
 	GEND.<GenderNumber>
