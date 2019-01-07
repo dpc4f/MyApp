@@ -49,17 +49,93 @@ begin
 	set @nGroup01 = cast((@MAX_SUBJECT_NUMBER * 0.05) as int)
 
 	declare @nGroup02 int
-	set @nGroup02 = cast((@MAX_SUBJECT_NUMBER * 0.6) as int)
+	set @nGroup02 = cast((@MAX_SUBJECT_NUMBER * 0.2) as int)
 
 	declare @nGroup03 int
-	set @nGroup03 = cast((@MAX_SUBJECT_NUMBER * 0.2) as int)
+	set @nGroup03 = cast((@MAX_SUBJECT_NUMBER * 0.15) as int)
 
 	declare @nGroup04 int
-	set @nGroup04 = cast((@MAX_SUBJECT_NUMBER * 0.15) as int)
+	set @nGroup04 = cast((@MAX_SUBJECT_NUMBER * 0.1) as int)
+
+	declare @nCounter int
+	declare @idSubject nchar(20)
+	declare @nSbjNumber int
 
 	-- generate a random number (SbjNumber) and add it to Group01
+	declare @group01Tbl table (nRow int, IdSubject nchar(20) not null)
+	
+	set @nCounter = 1
+	while (@nCounter <= @nGroup01)
+	begin
+		set @nSbjNumber = dbo.fn_Random(@MAX_SUBJECT_NUMBER) + 1
+		set @idSubject = null
+		set @idSubject = (select IdSubject from Subjects where @nSbjNumber = SubjectNumber)
+		if (@idSubject is not null)
+		begin
+			insert into @group01Tbl
+			values (@nCounter, @idSubject)
+
+			-- increase the counter
+			set @nCounter = @nCounter + 1
+		end
+	end
+	select * from @group01Tbl
+
+	-- generate a random number (SbjNumber) and add it to Group02
+	declare @group02Tbl table (nRow int, IdSubject nchar(20) not null)
+	
+	set @nCounter = 1
+	while (@nCounter <= @nGroup01)
+	begin
+		set @nSbjNumber = dbo.fn_Random(@MAX_SUBJECT_NUMBER) + 1
+		set @idSubject = null
+		set @idSubject = (select s.IdSubject 
+							from Subjects s 
+							left join @group01Tbl g on s.IdSubject = g.IdSubject
+							where @nSbjNumber = SubjectNumber and g.IdSubject is null)
+		if (@idSubject is not null)
+		begin
+			insert into @group02Tbl
+			values (@nCounter, @idSubject)
+
+			-- increase the counter
+			set @nCounter = @nCounter + 1
+		end
+	end
+	select * from @group02Tbl
+
+	-- to be continued with group03, group04
+
+	-- do registration with students of entranceYear 15
+	-- generate a random number of [2..7]
+	
+		-- generate a random subject number until student can roll in with this subject
+
+		-- check in Registrations table, calculate count() of that subject number
+		-- if the subject number is in group 1 and the count() is 19, don't create this registration
 
 end
+
+
+exec dbo.sp_DivideSubjestsIntoGroups;
+
+drop procedure dbo.sp_DivideSubjestsIntoGroups;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
