@@ -136,13 +136,19 @@ begin
 	where s.IdStudent = @idStudent and s.IdDept = d.IdDept and s.IdGender = g.IdGender and s.IdStudent = e.IdStudent
 end
 
-exec dbo.sp_GetStudentSummary 'STUD.15.01.100001   '
+exec dbo.sp_GetStudentSummary 'STUD.15.01.100001'
 
-drop procedure dbo.sp_GetStudentSummary
 
-select * 
-from Students as s, Departments as d, Genders as g, Enrollments as e
-where s.IdStudent = 'STUD.15.01.100001' and s.IdDept = d.IdDept and s.IdGender = g.IdGender and s.IdStudent = e.IdStudent
+create procedure sp_GetStudentSummary_v2
+	@idStudent nchar(20)
+  as
+begin
+	select * , dbo.fn_calculateGPA(@idStudent) as GPA, dbo.fn_calculateTotalCredits(@idStudent) as Credits
+	from Students s
+	where @idStudent = s.IdStudent
+end
+drop procedure dbo.sp_GetStudentSummary_v2
 
+exec sp_GetStudentSummary_v2 'STUD.15.01.100001'
 
 go

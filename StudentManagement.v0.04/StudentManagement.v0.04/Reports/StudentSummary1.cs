@@ -90,7 +90,7 @@ namespace StudentManagement.v0._04.Reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_stID {
+        public CrystalDecisions.Shared.IParameterField Parameter_id {
             get {
                 return this.DataDefinition.ParameterFields[0];
             }

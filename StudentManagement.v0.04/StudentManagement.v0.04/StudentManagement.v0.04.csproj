@@ -199,12 +199,6 @@
       <DependentUpon>Genders.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\StudentSumAll.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>StudentSumAll.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Reports\StudentSummary1.cs">
       <DependentUpon>StudentSummary.rpt</DependentUpon>
       <SubType>Component</SubType>
@@ -327,10 +321,6 @@
     <EmbeddedResource Include="Reports\Genders.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Genders.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\StudentSumAll.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>StudentSumAll.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\StudentSummary.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

@@ -133,12 +133,17 @@ namespace StudentManagement.v0._04.Controllers
         }
 
         // GET: Students/ViewReport
-        public ActionResult ViewReport(string idStudent)
+        public ActionResult ViewReport(string id)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            id = id.Replace('_', '.'); // back to normal
             ReportDocument reportDocument = new ReportDocument();
-            reportDocument.Load(Server.MapPath("~/Reports/StudentSumAll.rpt"));
-            reportDocument.SetDatabaseLogon("sa", "1234", "DESKTOP-3J745NI\\PROCASQLSERVER", "stmgmt", false);
-            reportDocument.SetParameterValue("stID", idStudent);
+            reportDocument.Load(Server.MapPath("~/Reports/StudentSummary.rpt"));
+            reportDocument.SetDatabaseLogon("sa", "1234", "DESKTOP-3J745NI\\PROCASQLSERVER", "stmgtdb", false);
+            reportDocument.SetParameterValue("id", id);
             var s = reportDocument.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
 
             return File(s, "application/pdf");
