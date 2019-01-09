@@ -98,3 +98,4 @@ D:\repos_tmp\StudentManagement.v0.04\StudentManagement.v0.04\bin\CrystalDecision
 D:\repos_tmp\StudentManagement.v0.04\StudentManagement.v0.04\bin\CrystalDecisions.ReportAppServer.CommonControls.dll
 D:\repos_tmp\StudentManagement.v0.04\StudentManagement.v0.04\bin\stdole.dll
 D:\repos_tmp\StudentManagement.v0.04\StudentManagement.v0.04\bin\GridMvc.dll
+D:\repos_tmp\StudentManagement.v0.04\StudentManagement.v0.04\obj\Debug\StudentManagement.v0.04.csprojAssemblyReference.cache

@@ -141,9 +141,9 @@ namespace StudentManagement.v0._04.Controllers
             }
             id = id.Replace('_', '.'); // back to normal
             ReportDocument reportDocument = new ReportDocument();
-            reportDocument.Load(Server.MapPath("~/Reports/StudentSummary.rpt"));
+            reportDocument.Load(Server.MapPath("~/Reports/StudentDetails.rpt"));
             reportDocument.SetDatabaseLogon("sa", "1234", "DESKTOP-3J745NI\\PROCASQLSERVER", "stmgtdb", false);
-            reportDocument.SetParameterValue("id", id);
+            reportDocument.SetParameterValue("studentID", "'" + id + "'");
             var s = reportDocument.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
 
             return File(s, "application/pdf");
