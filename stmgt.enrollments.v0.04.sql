@@ -23,7 +23,8 @@ begin
 			select random from 3..7 subject numbers
 	*/
 	declare @MAX_STUDENT_NUMBER int
-	set @MAX_STUDENT_NUMBER = (select max(StudNumber)from dbo.Students)
+	set @MAX_STUDENT_NUMBER = (select max(StudentNo)from dbo.Students)
+	print @MAX_STUDENT_NUMBER
 
 	declare @nStudNumber int
 	set @nStudNumber = 1
@@ -31,31 +32,33 @@ begin
 	begin
 		-- get deptId of the student
 		declare @idDept nchar(10)
-		set @idDept = (select Students.IdDept
-						from Students
-						where @nStudNumber = StudNumber)
-
+		--set @idDept = (select Students.IdDept
+		--				from Students
+		--				where @nStudNumber = IdStudent)
+		set @idDept = (select IdDept from Students where @nStudNumber = StudentNo)
 		-- get 2 last digits of current year
 		declare @nCurYear int 
 		select @nCurYear = dbo.fn_getCurrentYear()
 
 		-- get the student's ID
 		declare @idStudent as nchar(20)
-		set @idStudent = (select IdStudent 
-							from Students
-							where StudNumber = @nStudNumber)
+		-- set @idStudent = (select IdStudent 
+		--					from Students
+		--					where IdStudent = @nStudNumber)
+		-- set @idStudent = @nStudNumber
 		-- print @idStudent
 
 		-- get the entrance year of the student
 		declare @entranceYearStr as varchar(50)
 		declare @nEntrYear int
-		set @entranceYearStr = (SELECT tempo FROM (
-									SELECT ROW_NUMBER () OVER (ORDER BY nRow) AS RowNum, tempo
-									FROM dbo.fn_splitstring(@idStudent) 
-								) sub
-								WHERE RowNum = 2)
-		set @nEntrYear = cast(@entranceYearStr as int)
-		-- print @nEntrYear
+		-- set @entranceYearStr = (SELECT tempo FROM (
+		--							SELECT ROW_NUMBER () OVER (ORDER BY nRow) AS RowNum, tempo
+		--							FROM dbo.fn_splitstring(@idStudent) 
+		--						) sub
+		--						WHERE RowNum = 2)
+		-- set @nEntrYear = cast(@entranceYearStr as int)
+		set @nEntrYear = (select EntranceYear from Students where @idStudent = StudentNo)
+		print @nEntrYear
 
 		declare @nCountStudYear int
 		set @nCountStudYear = 1
@@ -96,34 +99,29 @@ begin
 				-- taught semester : TO BE CONTINUED, just filled the value 1
 
 				-- get the subject number
-				set @nSbjNumber= (Select SubjectNumber
-									FROM (
-											SELECT ROW_NUMBER () OVER (ORDER BY nRow) AS RowNum, *
-											FROM  @subjectTbl
-										) sub
-									WHERE RowNum = @nCount)
+				-- set @nSbjNumber= (Select SubjectNumber
+				--					FROM (
+				--							SELECT ROW_NUMBER () OVER (ORDER BY nRow) AS RowNum, *
+				--							FROM  @subjectTbl
+				--						) sub
+				--					WHERE RowNum = @nCount)
 				-- print 'Subject number: ' + cast(@nSbjNumber as nvarchar(50))
 
 				-- get the subject id
-				set @idSubject = (Select IdSubject
-									FROM (
-											SELECT ROW_NUMBER () OVER (ORDER BY nRow) AS RowNum, *
-											FROM  @subjectTbl
-										) sub
-									WHERE RowNum = @nCount)
+				set @idSubject = @nCount
 				-- print 'Subject id: ' + @idSubject
 		
 
 				-- create enrollment id
 				-- ENRO.<SubjectNumber>.<StudentNumber>.<TaughtYear>
-				declare @idEnrollment as varchar(50)
-				set @idEnrollment = 'ENRO.' + dbo.fn_ZeroPad(@nSbjNumber, 4) + '.' 
-											+ dbo.fn_ZeroPad(@nStudNumber, 6) + '.' + cast(@nTaughtYear as nvarchar(50))
+				-- declare @idEnrollment as varchar(50)
+				-- set @idEnrollment = 'ENRO.' + dbo.fn_ZeroPad(@nSbjNumber, 4) + '.' 
+				--							+ dbo.fn_ZeroPad(@nStudNumber, 6) + '.' + cast(@nTaughtYear as nvarchar(50))
 				-- print @idEnrollment
 
 				-- insert into enrollments table
 				insert into dbo.Enrollments
-				values (@idEnrollment, @idSubject, @idStudent, @nTaughtYear, 1, @nGradePoint)
+				values (@nSbjNumber, @nStudNumber, @nTaughtYear, @nGradePoint)
 	
 				-- increase the counter
 				set @nCount = @nCount + 1
@@ -140,6 +138,7 @@ end
 exec dbo.sp_GenerateEnrollData;
 
 select * from dbo.Enrollments;
+select * from dbo.Subjects;
 
 drop procedure dbo.sp_GenerateEnrollData
 
@@ -152,29 +151,29 @@ alter column IdEnrollment nchar(30) not null
 -- calculate subject numbers and return as a table
 -- input IdDept, IdStudTitle
 
-create function fn_GetListSubjectId (@idDept as varchar(50), @idStudTitle as varchar(50))
-	returns @rtnTable table (IdSubject varchar(50) not null, SubjectNumber int)
+create function fn_GetListSubjectId (@idDept as int, @idStudTitle as int)
+	returns @rtnTable table (IdSubject int not null)
   as
 begin
-	declare @tmpTable table (idSubject varchar(50), SubjectNumber int)
+	declare @tmpTable table (idSubject int)
 	
 	insert into @tmpTable
-	select IdSubject, SubjectNumber
+	select IdSubject
 	from Subjects 
-	where IdDept = @idDept and IdStdTitle = @idStudTitle
+	where IdDept = @idDept and IdStudentTitle = @idStudTitle
 
 	-- this select return data
 	insert into @rtnTable
-	select IdSubject, SubjectNumber 
+	select IdSubject 
 	from @tmpTable
-	order by SubjectNumber
+	order by IdSubject
 	return
 end
 
 drop function dbo.fn_GetListSubjectId
 
 select *
-from dbo.fn_GetListSubjectId('DEPT.02', 'STI.2')
+from dbo.fn_GetListSubjectId(5, 2)
 
 select * from Subjects
 
@@ -191,12 +190,12 @@ end
 select dbo.fn_GetStudentTitleId(5)
 
 -- have to sorted the returned table if necessary
-create function fn_Select_AtLeast03_SubjectIds (@idDept as nchar(10), @idStudTitle as nchar(10))
-	returns @rtnTable table( nRow int, IdSubject nchar(20) not null, SubjectNumber int )
+create function fn_Select_AtLeast03_SubjectIds (@idDept as int, @idStudTitle as int)
+	returns @rtnTable table( IdSubject int not null )
   as
 begin
-	declare @tmpTable table (nRow int, IdSubject varchar(50) not null, SubjectNumber int)
-	declare @sbjIdTable table (IdSubject varchar(50) not null, SubjectNumber int)
+	declare @tmpTable table (IdSubject int not null)
+	declare @sbjIdTable table (IdSubject int)
 	declare @nRandom int
 
 	insert into @sbjIdTable
@@ -224,17 +223,17 @@ begin
 		begin
 			set @nID = dbo.fn_Random(7) -- [0..6]
 			set @nID = @nID + 1 -- [1..7]
-			SELECT @idTmp = IdSubject, @sbjNumbTmp = SubjectNumber 
-							FROM (
-								SELECT ROW_NUMBER () OVER (ORDER BY IdSubject) AS RowNum, *
-								FROM @sbjIdTable
-							) sub
-							WHERE RowNum = @nID
-			set @nExist = ((select count(*) from @tmpTable where IdSubject = @idTmp))
+			-- SELECT @idTmp = IdSubject, @sbjNumbTmp = SubjectNumber 
+			--				FROM (
+			--					SELECT ROW_NUMBER () OVER (ORDER BY IdSubject) AS RowNum, *
+			--					FROM @sbjIdTable
+			--				) sub
+			--				WHERE RowNum = @nID
+			set @nExist = ((select count(*) from @tmpTable where IdSubject = @nID))
 		end
 
 		insert into @tmpTable
-		values (@nCnt, @idTmp, @sbjNumbTmp)
+		values (@nID)
 		-- increase the counter
 		set @nCnt = @nCnt + 1
 	end
@@ -249,7 +248,7 @@ end
 
 
 select *
-from dbo.fn_Select_AtLeast03_SubjectIds('DEPT.02', 'STI.2')
+from dbo.fn_Select_AtLeast03_SubjectIds(4, 2)
 
 drop function dbo.fn_Select_AtLeast03_SubjectIds;
 
@@ -275,3 +274,19 @@ alter table Enrollments
 add GradePoint real not null
 
 
+drop table Enrollments
+create table Enrollments
+(
+	IdEnroll  INT IDENTITY(1,1) NOT NULL PRIMARY KEY CLUSTERED,
+	IdSubject int,
+	IdStudent int,
+	TaughtYear int,
+	GradePoint real
+)
+
+select * 
+from Enrollments;
+
+
+select max(StudentNo)from dbo.Students
+select * from Students

@@ -20,3 +20,28 @@ values ('STI.6', 'Senior L2', 6);
 
 delete StdTitles
 where YearNumb = 4
+
+drop table StdTitles
+create table StdTitles
+(TitleNo INT IDENTITY(1,1) NOT NULL PRIMARY KEY CLUSTERED, 
+StudentTitle nvarchar(50))
+
+insert into StdTitles
+values ('Freshman');
+
+insert into StdTitles
+values ('Sophomore');
+
+insert into StdTitles
+values ('Junior');
+
+insert into StdTitles
+values ('Senior');
+
+insert into StdTitles
+values ('Senior L1');
+
+insert into StdTitles
+values ('Senior L2');
+
+select * from StdTitles;

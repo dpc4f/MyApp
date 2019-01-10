@@ -62,5 +62,61 @@ UPDATE Departments
 SET IdDept = RTRIM(LTRIM(IdDept))
 
 
+drop table Departments;
+create table Departments (
+	IdDept INT IDENTITY(1,1) NOT NULL PRIMARY KEY CLUSTERED,
+	DeptName nvarchar(50)
+)
 
+
+insert into Departments
+values ('Vat Ly Dia Cau');
+
+insert into Departments
+values ('Vat Ly Khong Gian');
+
+insert into Departments
+values ('Toan Vat Ly');
+
+insert into Departments
+values ('Vat Ly Luong Tu');
+
+insert into Departments
+values ('Cong Nghe Nang Luong');
+
+insert into Departments
+values ('Vat Ly Vat Chat');
+
+insert into Departments
+values ('Khoa Hoc May Tinh');
+
+insert into Departments
+values ('TRI TUE NHAN TAO');
+
+insert into Departments
+values ('Cong Nghe Phan Mem');
+
+insert into Departments
+values ('He Thong Thong Tin');
+
+insert into Departments
+values ('Toan Va Cau Truc Du Lieu & Thuat Toan');
+
+insert into Departments
+values ('He Thong Nhung');
+
+insert into Departments
+values ('Ngon Ngu Lap Trinh');
+
+insert into Departments
+values ('Co So Du Lieu');
+
+insert into Departments
+values ('Mang Luoi Da Thiet Bi');
+
+insert into Departments
+values ('Vien Thong Thong Tin');
+
+insert into Departments
+values ('Thong Tin Ung Dung');
 

@@ -25,14 +25,6 @@ namespace StudentManagement.v0._04.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Class> Classes { get; set; }
-        public virtual DbSet<Department> Departments { get; set; }
-        public virtual DbSet<Enrollment> Enrollments { get; set; }
-        public virtual DbSet<Gender> Genders { get; set; }
-        public virtual DbSet<Registration> Registrations { get; set; }
-        public virtual DbSet<StdTitle> StdTitles { get; set; }
         public virtual DbSet<Student> Students { get; set; }
-        public virtual DbSet<Subject> Subjects { get; set; }
-        public virtual DbSet<TheSchool> TheSchools { get; set; }
     }
 }

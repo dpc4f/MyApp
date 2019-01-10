@@ -14,27 +14,13 @@ namespace StudentManagement.v0._04.Models
     
     public partial class Student
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Student()
-        {
-            this.Enrollments = new HashSet<Enrollment>();
-            this.Registrations = new HashSet<Registration>();
-        }
-    
+        public int StudentNo { get; set; }
         public string IdStudent { get; set; }
-        public string FirstN { get; set; }
-        public string LastN { get; set; }
-        public string IdGender { get; set; }
+        public string FName { get; set; }
+        public string LName { get; set; }
         public string IdDept { get; set; }
-        public string IdStudTitle { get; set; }
-        public int StudNumber { get; set; }
-    
-        public virtual Department Department { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Enrollment> Enrollments { get; set; }
-        public virtual Gender Gender { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Registration> Registrations { get; set; }
-        public virtual StdTitle StdTitle { get; set; }
+        public string IdGender { get; set; }
+        public string IdTitle { get; set; }
+        public Nullable<int> EntranceYear { get; set; }
     }
 }

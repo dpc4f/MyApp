@@ -54,19 +54,21 @@ begin
 				set @idGender = 'GEND.' + CAST((dbo.fn_Random(2)+1) as varchar(50))
 
 				-- query idDept
-				declare @idDept varchar(50)
-				set @idDept = (select IdDept from dbo.Departments where @nDept = DeptNumb)
-				print @idDept
+				--declare @idDept varchar(50)
+				--set @idDept = (select IdDept from dbo.Departments where @nDept = DeptNumb)
+				--print @idDept
+				-- now idDept is @nDept
 
 				-- query idStdTitle
-				declare @idStdtitle varchar(50)
-				set @idStdtitle = (select IdTitle from dbo.StdTitles where @nYear = YearNumb)
-				print @idStdTitle
+				-- declare @idStdtitle varchar(50)
+				-- set @idStdtitle = (select IdTitle from dbo.StdTitles where @nYear = YearNumb)
+				-- print @idStdTitle
+				-- now idStudentTitle is @nYear
 
 				-- add to the table
 				insert into dbo.Students
 				-- values (@idStudent, @firstName, @lastName, @idGender, @idDept, @idStdtitle, @nStud)
-				values (@firstName, @lastName, @idDept, @idGender, @idStdtitle)
+				values (@firstName, @lastName, @nDept, @idGender, @nYear, @CURRENT_YEAR-5+@nYear)
 
 				-- update counters				
 				set @nStud = @nStud + 1
@@ -129,7 +131,7 @@ begin
 	end
 end
 
-
+go
 
 create procedure sp_GetStudentSummary
 	@idStudent nchar(20)
@@ -165,9 +167,9 @@ CREATE TABLE dbo.Students
    IdStudent AS 'STUD.' + RIGHT(rtrim(IdDept), 2) + '.' + (Cast((EntranceYear % 100) as varchar(2)) + '.' + dbo.fn_ZeroPad(StudentNo, 6)),
    FName nvarchar(50),
    LName nvarchar(50),
-   IdDept nchar(10),
-   IdGender nchar(10),
-   IdTitle nchar(10),
+   IdDept int,
+   IdGender int,
+   IdTitle int,
    EntranceYear int
 )
 drop table dbo.Students

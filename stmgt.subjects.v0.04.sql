@@ -40,17 +40,17 @@ begin
 
 				-- query idDept
 				declare @idDept varchar(50)
-				set @idDept = (select IdDept from dbo.Departments where @nDept = DeptNumb)
+				set @idDept = (select IdDept from dbo.Departments where @nDept = IdDept)
 				print @idDept
 
 				-- query idStdTitle
 				declare @idStdtitle varchar(50)
-				set @idStdtitle = (select IdTitle from dbo.StdTitles where @nYear = YearNumb)
+				set @idStdtitle = (select TitleNo from dbo.StdTitles where @nYear = TitleNo)
 				print @idStdTitle
 
 				-- add to the table
 				insert into dbo.Subjects
-				values (@idSubject, 'Subject Name', @nCredit, @idDept, @idStdtitle, @nSubj)
+				values ('Subject Name', @nCredit, @nDept, @nYear)
 
 				-- update counters				
 				set @nSubj = @nSubj + 1
@@ -91,5 +91,17 @@ exec sp_rename 'Subjects.IdSubjects', 'IdSubject', 'COLUMN';
 
 alter table dbo.Subjects
 add SubjectNumber int null
+
+
+create table Subjects 
+(
+	IdSubject  INT IDENTITY(1,1) NOT NULL PRIMARY KEY CLUSTERED,
+	SubjectName nvarchar(50),
+	Credits int,
+	IdDept int,
+	IdStudentTitle int
+)
+
+drop table Subjects;
 
 
