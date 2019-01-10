@@ -58,7 +58,8 @@ values ('DEPT.17', 'Thong Tin Ung Dung', 17);
 
 
 
-
+UPDATE Departments
+SET IdDept = RTRIM(LTRIM(IdDept))
 
 
 

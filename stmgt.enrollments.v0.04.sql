@@ -273,3 +273,5 @@ drop column TaughtSemester
 
 alter table Enrollments
 add GradePoint real not null
+
+

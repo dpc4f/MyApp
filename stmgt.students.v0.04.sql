@@ -65,7 +65,8 @@ begin
 
 				-- add to the table
 				insert into dbo.Students
-				values (@idStudent, @firstName, @lastName, @idGender, @idDept, @idStdtitle, @nStud)
+				-- values (@idStudent, @firstName, @lastName, @idGender, @idDept, @idStdtitle, @nStud)
+				values (@firstName, @lastName, @idDept, @idGender, @idStdtitle)
 
 				-- update counters				
 				set @nStud = @nStud + 1
@@ -80,11 +81,11 @@ end
 drop procedure dbo.sp_GenerateStudentData;
 
 exec dbo.sp_GenerateStudentData;
+go
 
+exec dbo.sp_GenerateStudentData
 
-
-
-select * from Students;
+select top(10) * from Students;
 
 select DeptNumb
 from Departments
@@ -92,6 +93,9 @@ from Departments
 select dbo.fn_ZeroPad(13, 3)
 
 delete Students;
+go
+
+drop table Students;
 
 
 alter table dbo.Students
@@ -152,3 +156,39 @@ drop procedure dbo.sp_GetStudentSummary_v2
 exec sp_GetStudentSummary_v2 'STUD.15.01.100001'
 
 go
+
+
+-- drop the table Students and re-create with computed key IdStudent
+CREATE TABLE dbo.Students
+(
+   StudentNo INT IDENTITY(1,1) NOT NULL PRIMARY KEY CLUSTERED,
+   IdStudent AS 'STUD.' + RIGHT(rtrim(IdDept), 2) + '.' + (Cast((EntranceYear % 100) as varchar(2)) + '.' + dbo.fn_ZeroPad(StudentNo, 6)),
+   FName nvarchar(50),
+   LName nvarchar(50),
+   IdDept nchar(10),
+   IdGender nchar(10),
+   IdTitle nchar(10),
+   EntranceYear int
+)
+drop table dbo.Students
+
+select * from Departments
+
+select right(rtrim(IdDept), 2) from Departments
+
+select right(idDept, 2) from Departments
+
+
+UPDATE Departments
+SET IdDept = RTRIM(LTRIM(IdDept))
+
+
+
+alter table Students
+add EntranceYear int
+
+
+
+
+
+
