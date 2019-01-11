@@ -150,47 +150,23 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Class.cs">
-      <DependentUpon>sdmgtdb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Department.cs">
-      <DependentUpon>sdmgtdb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Enrollment.cs">
-      <DependentUpon>sdmgtdb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Gender.cs">
-      <DependentUpon>sdmgtdb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Registration.cs">
-      <DependentUpon>sdmgtdb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sdmgtdb.Context.cs">
+    <Compile Include="Models\stmgtdb.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>sdmgtdb.Context.tt</DependentUpon>
+      <DependentUpon>stmgtdb.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sdmgtdb.cs">
+    <Compile Include="Models\stmgtdb.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>sdmgtdb.tt</DependentUpon>
+      <DependentUpon>stmgtdb.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sdmgtdb.Designer.cs">
+    <Compile Include="Models\stmgtdb.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>sdmgtdb.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\StdTitle.cs">
-      <DependentUpon>sdmgtdb.tt</DependentUpon>
+      <DependentUpon>stmgtdb.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Student.cs">
-      <DependentUpon>sdmgtdb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Subject.cs">
-      <DependentUpon>sdmgtdb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TheSchool.cs">
-      <DependentUpon>sdmgtdb.tt</DependentUpon>
+      <DependentUpon>stmgtdb.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reports\Genders.cs">
@@ -222,26 +198,26 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\sdmgtdb.Context.tt">
+    <Content Include="Models\stmgtdb.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>sdmgtdb.Context.cs</LastGenOutput>
-      <DependentUpon>sdmgtdb.edmx</DependentUpon>
+      <DependentUpon>stmgtdb.edmx</DependentUpon>
+      <LastGenOutput>stmgtdb.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\sdmgtdb.tt">
+    <Content Include="Models\stmgtdb.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>sdmgtdb.edmx</DependentUpon>
-      <LastGenOutput>sdmgtdb.cs</LastGenOutput>
+      <DependentUpon>stmgtdb.edmx</DependentUpon>
+      <LastGenOutput>stmgtdb.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\sdmgtdb.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>sdmgtdb.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\sdmgtdb.edmx.diagram">
-      <DependentUpon>sdmgtdb.edmx</DependentUpon>
-    </Content>
     <Content Include="Grid.mvc.readme" />
+    <EntityDeploy Include="Models\stmgtdb.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>stmgtdb.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\stmgtdb.edmx.diagram">
+      <DependentUpon>stmgtdb.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\gridmvc.js" />
     <Content Include="Scripts\gridmvc.lang.ru.js" />
