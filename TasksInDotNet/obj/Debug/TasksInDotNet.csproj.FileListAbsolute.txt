@@ -1,0 +1,10 @@
+D:\repos_tmp\TasksInDotNet\bin\Debug\TasksInDotNet.exe.config
+D:\repos_tmp\TasksInDotNet\bin\Debug\TasksInDotNet.exe
+D:\repos_tmp\TasksInDotNet\bin\Debug\TasksInDotNet.pdb
+D:\repos_tmp\TasksInDotNet\obj\Debug\TasksInDotNet.csprojAssemblyReference.cache
+D:\repos_tmp\TasksInDotNet\obj\Debug\TasksInDotNet.MainForm.resources
+D:\repos_tmp\TasksInDotNet\obj\Debug\TasksInDotNet.Properties.Resources.resources
+D:\repos_tmp\TasksInDotNet\obj\Debug\TasksInDotNet.csproj.GenerateResource.cache
+D:\repos_tmp\TasksInDotNet\obj\Debug\TasksInDotNet.csproj.CoreCompileInputs.cache
+D:\repos_tmp\TasksInDotNet\obj\Debug\TasksInDotNet.exe
+D:\repos_tmp\TasksInDotNet\obj\Debug\TasksInDotNet.pdb
