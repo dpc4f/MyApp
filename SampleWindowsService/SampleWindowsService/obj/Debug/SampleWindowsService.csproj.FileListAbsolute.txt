@@ -1,0 +1,15 @@
+c:\users\alibaig\documents\visual studio 2013\Projects\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe.config
+c:\users\alibaig\documents\visual studio 2013\Projects\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe
+c:\users\alibaig\documents\visual studio 2013\Projects\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.pdb
+c:\users\alibaig\documents\visual studio 2013\Projects\SampleWindowsService\SampleWindowsService\obj\Debug\SampleWindowsService.ProjectInstaller.resources
+c:\users\alibaig\documents\visual studio 2013\Projects\SampleWindowsService\SampleWindowsService\obj\Debug\SampleWindowsService.csproj.GenerateResource.Cache
+c:\users\alibaig\documents\visual studio 2013\Projects\SampleWindowsService\SampleWindowsService\obj\Debug\SampleWindowsService.exe
+c:\users\alibaig\documents\visual studio 2013\Projects\SampleWindowsService\SampleWindowsService\obj\Debug\SampleWindowsService.pdb
+D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe.config
+D:\SampleWindowsService\SampleWindowsService\obj\Debug\SampleWindowsService.exe
+D:\SampleWindowsService\SampleWindowsService\obj\Debug\SampleWindowsService.pdb
+D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe
+D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.pdb
+D:\SampleWindowsService\SampleWindowsService\obj\Debug\SampleWindowsService.ProjectInstaller.resources
+D:\SampleWindowsService\SampleWindowsService\obj\Debug\SampleWindowsService.csproj.GenerateResource.Cache
+D:\SampleWindowsService\SampleWindowsService\obj\Debug\SampleWindowsService.csprojResolveAssemblyReference.cache

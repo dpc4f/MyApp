@@ -1,0 +1,260 @@
+﻿Installing assembly 'C:\Users\ALIBAIG\Documents\Visual Studio 2013\Projects\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ALIBAIG\Documents\Visual Studio 2013\Projects\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.InstallLog
+   assemblypath = C:\Users\ALIBAIG\Documents\Visual Studio 2013\Projects\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe
+Installing service Service1...
+Service Service1 has been successfully installed.
+Creating EventLog source Service1 in log Application...
+Committing assembly 'C:\Users\ALIBAIG\Documents\Visual Studio 2013\Projects\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ALIBAIG\Documents\Visual Studio 2013\Projects\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.InstallLog
+   assemblypath = C:\Users\ALIBAIG\Documents\Visual Studio 2013\Projects\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe
+Installing assembly 'C:\Users\ALIBAIG\Documents\Visual Studio 2013\Projects\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ALIBAIG\Documents\Visual Studio 2013\Projects\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.InstallLog
+   assemblypath = C:\Users\ALIBAIG\Documents\Visual Studio 2013\Projects\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe
+Installing service Service1...
+Creating EventLog source Service1 in log Application...
+Rolling back assembly 'C:\Users\ALIBAIG\Documents\Visual Studio 2013\Projects\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ALIBAIG\Documents\Visual Studio 2013\Projects\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.InstallLog
+   assemblypath = C:\Users\ALIBAIG\Documents\Visual Studio 2013\Projects\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe
+Restoring event log to previous state for source Service1.
+Installing assembly 'C:\Users\ALIBAIG\Documents\Visual Studio 2013\Projects\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ALIBAIG\Documents\Visual Studio 2013\Projects\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.InstallLog
+   assemblypath = C:\Users\ALIBAIG\Documents\Visual Studio 2013\Projects\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe
+Installing service SampleService...
+Creating EventLog source SampleService in log Application...
+Rolling back assembly 'C:\Users\ALIBAIG\Documents\Visual Studio 2013\Projects\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ALIBAIG\Documents\Visual Studio 2013\Projects\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.InstallLog
+   assemblypath = C:\Users\ALIBAIG\Documents\Visual Studio 2013\Projects\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe
+Restoring event log to previous state for source SampleService.
+Installing assembly 'C:\Users\ALIBAIG\Documents\Visual Studio 2013\Projects\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ALIBAIG\Documents\Visual Studio 2013\Projects\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.InstallLog
+   assemblypath = C:\Users\ALIBAIG\Documents\Visual Studio 2013\Projects\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe
+Installing service SampleService...
+Service SampleService has been successfully installed.
+Creating EventLog source SampleService in log Application...
+Committing assembly 'C:\Users\ALIBAIG\Documents\Visual Studio 2013\Projects\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\ALIBAIG\Documents\Visual Studio 2013\Projects\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.InstallLog
+   assemblypath = C:\Users\ALIBAIG\Documents\Visual Studio 2013\Projects\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe
+Installing assembly 'D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.InstallLog
+   assemblypath = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe
+Installing service Sample Service...
+Service Sample Service has been successfully installed.
+Creating EventLog source Sample Service in log Application...
+Committing assembly 'D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.InstallLog
+   assemblypath = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe
+Installing assembly 'D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.InstallLog
+   assemblypath = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe
+Installing service Sample Service...
+Creating EventLog source Sample Service in log Application...
+Rolling back assembly 'D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.InstallLog
+   assemblypath = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe
+Restoring event log to previous state for source Sample Service.
+Installing assembly 'D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.InstallLog
+   assemblypath = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe
+Installing service Sample Service...
+Creating EventLog source Sample Service in log Application...
+Rolling back assembly 'D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.InstallLog
+   assemblypath = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe
+Restoring event log to previous state for source Sample Service.
+Installing assembly 'D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.InstallLog
+   assemblypath = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe
+Installing service Sample Service...
+Creating EventLog source Sample Service in log Application...
+Rolling back assembly 'D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.InstallLog
+   assemblypath = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe
+Restoring event log to previous state for source Sample Service.
+Installing assembly 'D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.InstallLog
+   assemblypath = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe
+Installing service Sample Service...
+Creating EventLog source Sample Service in log Application...
+Rolling back assembly 'D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.InstallLog
+   assemblypath = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe
+Restoring event log to previous state for source Sample Service.
+Installing assembly 'D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.InstallLog
+   assemblypath = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe
+Installing service Sample Service...
+Creating EventLog source Sample Service in log Application...
+Rolling back assembly 'D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.InstallLog
+   assemblypath = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe
+Restoring event log to previous state for source Sample Service.
+Installing assembly 'D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.InstallLog
+   assemblypath = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe
+Installing service Sample Service...
+Creating EventLog source Sample Service in log Application...
+Rolling back assembly 'D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.InstallLog
+   assemblypath = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe
+Restoring event log to previous state for source Sample Service.
+Installing assembly 'D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.InstallLog
+   assemblypath = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe
+Installing service Sample Service...
+Creating EventLog source Sample Service in log Application...
+Rolling back assembly 'D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.InstallLog
+   assemblypath = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe
+Restoring event log to previous state for source Sample Service.
+Installing assembly 'D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.InstallLog
+   assemblypath = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe
+Installing service Sample Service...
+Creating EventLog source Sample Service in log Application...
+Rolling back assembly 'D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.InstallLog
+   assemblypath = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe
+Restoring event log to previous state for source Sample Service.
+Installing assembly 'D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.InstallLog
+   assemblypath = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe
+Installing service Sample Service...
+Creating EventLog source Sample Service in log Application...
+Rolling back assembly 'D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.InstallLog
+   assemblypath = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe
+Restoring event log to previous state for source Sample Service.
+Installing assembly 'D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.InstallLog
+   assemblypath = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe
+Installing service Sample Service...
+Creating EventLog source Sample Service in log Application...
+Rolling back assembly 'D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.InstallLog
+   assemblypath = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe
+Restoring event log to previous state for source Sample Service.
+Installing assembly 'D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.InstallLog
+   assemblypath = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe
+Installing service Sample Service...
+Creating EventLog source Sample Service in log Application...
+Rolling back assembly 'D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.InstallLog
+   assemblypath = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe
+Restoring event log to previous state for source Sample Service.
+Installing assembly 'D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.InstallLog
+   assemblypath = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe
+Installing service Sample Service...
+Creating EventLog source Sample Service in log Application...
+Rolling back assembly 'D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.InstallLog
+   assemblypath = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe
+Restoring event log to previous state for source Sample Service.
+Installing assembly 'D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.InstallLog
+   assemblypath = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe
+Installing service Sample Service...
+Creating EventLog source Sample Service in log Application...
+Rolling back assembly 'D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.InstallLog
+   assemblypath = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe
+Restoring event log to previous state for source Sample Service.
+Installing assembly 'D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.InstallLog
+   assemblypath = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe
+Installing service Sample Service...
+Creating EventLog source Sample Service in log Application...
+Rolling back assembly 'D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.InstallLog
+   assemblypath = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe
+Restoring event log to previous state for source Sample Service.
+Installing assembly 'D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.InstallLog
+   assemblypath = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe
+Installing service Sample Service...
+Creating EventLog source Sample Service in log Application...
+Rolling back assembly 'D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.InstallLog
+   assemblypath = D:\SampleWindowsService\SampleWindowsService\bin\Debug\SampleWindowsService.exe
+Restoring event log to previous state for source Sample Service.
